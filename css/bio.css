@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+header {
+	text-align: center;
+    letter-spacing: 1px;
+    height:10em;
+}
+
+body {
+	font-size: 1em;
+	margin: 0;
+	font-family: 'VT323', monospace;
+	color: rgb(229, 229, 210);
+	line-height: var(--line-height);
+	background-color: black;
+	--line-height: 19px;
+    height: 100vh;
+	width: 100vw;
+	position: fixed;
+	overflow: hidden;
+}
+
+a { 
+    text-decoration: none;
+    color:rgb(229, 229, 210) ;
+}
+
+P.backtomainpage {
+    font-family: 'VT323', monospace;
+    font-size:x-large;
+    text-decoration:none;
+}
+
+.liveTime{
+float: left;
+}
+
+PRE.lifeTimeList{
+    font-family: 'VT323', monospace;
+    font-size:x-large;
+    text-decoration:none;
+}
+
+PRE.earth {
+    font-family: 'VT323', monospace;
+    font-size:x-large;
+    text-decoration:none;
+    float: right;
+}
+
+P.PS {
+text-align: center;
+font-size:  25px;
+}
+
+#clock {
+float: right;
+font-size: x-large;
+}
+
+footer{ 
+    text-align: center;
+    font-size: 35px;
+    position:absolute; 
+    bottom:1; 
+    width:100%; 
+    height:47px; 
+  }
+footer li {
+    display: inline-block;
+    padding: 10px;
+    font-size: 35px;
+  }
+
+

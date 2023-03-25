@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR0M31H3U5</title>
+    <!-- <link rel="icon" type="image/png" sizes="512x512"  href="ico/icon_512.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="ico/icon_192.png">
+    <link rel="icon" type="image/png" sizes="32x32"    href="ico/icon_32.png"> -->
+    <link rel="stylesheet" type="text/css"             href="../css/blog.css"/>
+    <link rel="stylesheet"                             href="../js/app.js">
+    <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
+    <script>  
+      setInterval(function () {
+          var now = new Date();
+          var clock = document.getElementById("clock");
+          clock.innerHTML = now.toLocaleTimeString();
+      }, 1000);
+      </script>
+    <!-- <link rel="preload" href="/fonts/Sono-Regular.ttf" as="font"> -->
+</head>
+<body>
+
+
+  <header>
+    <pre>
+
+ ________  ________  ________  _____ ______   ________    _____  ___  ___  ________  ___  ___  ________      
+|\   __  \|\   __  \|\   __  \|\   _ \  _   \|\_____  \  / __  \|\  \|\  \|\_____  \|\  \|\  \|\   ____\     
+ \ \  \|\  \ \  \|\  \ \  \|\  \ \  \\\__\ \  \|____|\ /_|\/_|\  \ \  \\\  \|____|\ /_ \  \\\  \ \  \___|_    
+  \ \   ____\ \   _  _\ \  \\\  \ \  \\|__| \  \    \|\  \|/ \ \  \ \   __  \    \|\  \ \  \\\  \ \_____  \   
+   \ \  \___|\ \  \\  \\ \  \\\  \ \  \    \ \  \  __\_\  \   \ \  \ \  \ \  \  __\_\  \ \  \\\  \|____|\  \  
+    \ \__\    \ \__\\ _\\ \_______\ \__\    \ \__\|\_______\   \ \__\ \__\ \__\|\_______\ \_______\____\_\  \ 
+     \|__|     \|__|\|__|\|_______|\|__|     \|__|\|_______|    \|__|\|__|\|__|\|_______|\|_______|\_________\
+                                                                                                  \|_________|
+    </pre>
+
+</header>
+
+<div class="separator"></div>
+
+<script type="text/javascript"> 
+    
+    function runningline(msg,ctrlwidth)
+    {
+    msg = " "+msg
+    newmsg = msg
+    while (newmsg.length < ctrlwidth) {newmsg += msg}
+    document.write ('<form name="Tekst">')
+    document.write ('<input name="tekst" style="border:0;font-weight:bold;color:rgb(229, 229, 210);background-color:black;" value= "'+newmsg+'" size= '+ctrlwidth+' />')
+    document.write ('</form>')
+    prokrutka()
+    }
+    function prokrutka()
+    {
+    NowMsg=document.Tekst.tekst.value
+    NowMsg=NowMsg.substring(1,NowMsg.length)+NowMsg.substring(0,1)
+    document.Tekst.tekst.value = NowMsg
+    bannerid=setTimeout("prokrutka()",500)
+    }
+    </script>
+
+    <script type="text/javascript">
+    runningline("プロメテウス",500)
+    </script> 
+
+    <div class="navbar">
+      <a href="../index.html" class="BtmpTxt">&lt---back to main page</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+
+      <span id="clock" style="color: rgb(229, 229, 210);"></span>
+    </div>
+    
+    <div class="separator"></div>
+
+    <div class="container"> 
+      <div class="dungeon">
+        <div class="ascii">
+          
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+      const ascii = ".:-=+*#%@"; 
+
+const canvas = document.createElement('canvas');
+canvas.width = 32;
+canvas.height = 48;
+
+const ctx = canvas.getContext('2d');
+
+const asciicontainer = document.querySelector('.ascii');
+
+const map = (x, max, min, tmax, tmin) => (x - min) / (max - min) * (tmax - tmin) + tmin;
+
+const lerp = (x, a, b) => a + (b - a) * x;
+
+const map_table = new Array(255).fill(1).map((_, i) => Math.ceil(map(i, 255, 0, ascii.length - 1, 0)));
+
+const line = (x1, y1, x2, y2) => {
+    ctx.beginPath();
+
+    let grad = ctx.createLinearGradient(x1, y1, x2, y2);
+    grad.addColorStop(0, "rgba(255, 255, 255, 0.75)");
+    grad.addColorStop(0.5, "rgba(255, 255, 255, 0.35)");
+    grad.addColorStop(1, "rgba(255, 255, 255, 0.12)");
+    
+    ctx.strokeStyle = grad;
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+const getAsciiOutput = (canvas, ctx) => {
+    let imgd = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let pix = imgd.data;
+
+    let output = '';
+
+    for (let i = 0, n = pix.length; i < n; i += 4) {
+        let xpos = (i / 4) % canvas.width;
+        let char = ascii[map_table[pix[i]]];
+        
+        if (xpos == 0) {
+            output += '<div>';
+        } else if (xpos == canvas.width - 1) {
+            output.innerHTML += '</div>';
+        }
+
+        output += char == ascii[0] ? `<span style="color: #444">${char}</span>` : char;
+    }
+
+    return output;
+}
+
+const randomBox = () => ({
+    x: Math.floor(Math.random() * 10) + 7,
+    y: Math.floor(Math.random() * 15) + 7,
+    sx: 0,
+    sy: 0,
+    w: 6,
+    h: 10,
+    progress: 0
+});
+
+let box = randomBox();
+box.sx = box.x;
+box.sy = box.y;
+
+let nextPos = randomBox();
+
+let tick = 0;
+let mouseState = false;
+
+const loop = () => {
+    tick += 0.025;
+
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#f4f4f4'
+    ctx.fillRect(box.x, box.y, box.w, box.h);
+
+
+    line(box.x, box.y, 0, 0);
+    line(box.x + box.w, box.y, canvas.width, 0);
+    line(box.x, box.y + box.h, 0, canvas.height);
+    line(box.x + box.w, box.y + box.h, canvas.width, canvas.height);
+
+    ctx.beginPath();
+    let x = box.x + box.w / 2;
+    let y = box.y + box.h / 2;
+
+    let grad = ctx.createRadialGradient(x, y, 5, x, y, 20);
+    grad.addColorStop(0, "rgba(255, 255, 255, 0.5)");
+    grad.addColorStop(0.5, "rgba(0, 0, 0, 0)");
+    grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+    
+    ctx.fillStyle = grad;
+    ctx.arc(x, y, 6 + 2.5 * Math.acos(Math.sin(tick) * Math.PI / 4), 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+
+    if (!mouseState) {
+        if (box.progress < 0.99) {
+            box.progress += 0.005;
+            box.x = lerp(box.progress, box.sx, nextPos.x);
+            box.y = lerp(box.progress, box.sy, nextPos.y);
+        } else {
+            box = Object.assign({}, nextPos);
+            box.sx = box.x;
+            box.sy = box.y;
+            nextPos = randomBox();
+        }
+    }
+
+    asciicontainer.innerHTML = getAsciiOutput(canvas, ctx);
+
+    requestAnimationFrame(loop);
+}
+
+loop();
+
+asciicontainer.addEventListener('mouseenter', _ => {
+    mouseState = true;
+});
+
+asciicontainer.addEventListener('mouseleave', _ => {
+    mouseState = false;
+});
+
+window.addEventListener('mousemove', e => {
+    if (mouseState) {
+        box.x = map(e.clientX, window.innerWidth, 0, canvas.width, 0) - box.w / 2;
+        box.y = map(e.clientY, window.innerHeight, 0, canvas.height, 0) - box.h / 2;
+    }
+});
+    </script>
+
+
+    
+    <script class="dunnut">
+      const pre = document.createElement("pre");
+      document.body.appendChild(pre);
+
+                    let x=1760,
+                z=0,y=0;setInterval
+              (()=>{z+=.07,y+=.03;const
+            a=[...new Array(x)].map( (a,r
+          )=>r % 80 === 79 ?"\n":" "),r=new
+        Array(x).fill(0), t= Math.cos(z),e=
+        Math.sin(z),n=Math.cos(y), o=Math.sin
+      (y);for(let s=0;s<6.28; s+=.07){const c
+      =Math.cos(s),h=      Math.sin(s);for(let
+      s=0;s<6.28;s+=          .02){const v=Math
+      .sin(s),M=Math          .cos(s),i=c+2,l=1
+      /(v*i*e+h*t+5          ),p=v*i*t-h*e,d=0
+      |40+30*l*(M*i*n      -p*o),m=0|12+15*l*
+        (M*i*o+p*n),f=0|8*((h*e-v*c*t)*n-v*c*
+          e-h*t-M*c*o), y=d+80*m;m<22&&m>=0
+          &&d>=0&&d<79&&l>r[y] &&(r[y]=l,
+            a[y]= ".,-~:;=!*#$@"[f>0?f:0
+            ])}}pre.innerHTML=a.join
+                ("")},50);
+
+      const funs = new Funs("light");
+      funs.signature();
+    </script>
+    
+<!-- 
+        <div>
+          <p class="backtomainpage">
+            The page is still being developed. <br>
+             It'll be done soon, but in the meantime, enjoy the movie!
+          </p>
+
+          <iframe width="800" height="400"
+    src="https://www.youtube.com/embed/Dgwyo6JNTDA"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+</iframe>
+        </div> -->
+        
+
+</body>

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
+header {
+	text-align: center;
+    letter-spacing: 1px;
+    height:10em;
+}
+
+body {
+	font-size: 1em;
+	margin: 0;
+	font-family: 'VT323', monospace;
+	color: rgb(229, 229, 210);
+	line-height: var(--line-height);
+	background-color: black;
+	--line-height: 19px;
+	/* width: 100%;
+    max-width: 100%; */
+    overflow-x: hidden;
+    /* position: absolute; */
+}
+
+
+a { 
+    text-decoration: none;
+    color:rgb(229, 229, 210) ;
+}
+
+
+#clock {
+    float: right;
+    font-size: x-large;
+    }
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    background-color: black;
+    top: 0;
+    width: 100%;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    display: block;
+    color: rgb(229, 229, 210);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: x-large;
+}
+
+.navbar a:hover {
+    background: rgb(229, 229, 210);
+    color: black;
+}
+
+.separator {
+    width: 100%;
+    height: 15px;
+}
+
+.container {
+    width: 100%;
+    height: 600px;
+    margin-left: 10%;
+}
+
+.dungeon{
+    position: absolute;
+    border: 1px dashed #585858;
+    width: 75%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dungeon .ascii {
+    border: 1px dashed #585858;
+    color: rgb(229, 229, 210);
+    padding: 20px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    line-height: 9px;
+    
+}
+
+.dungeon .ascii, .screen {
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
