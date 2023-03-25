@@ -33,6 +33,7 @@ a {
 #clock {
     float: right;
     font-size: x-large;
+    margin-right: 2%;
     }
 
 .navbar {
@@ -75,20 +76,15 @@ a {
     margin-right: auto;
 }
 
-.dungeon .text {
+.dungeon .MainText {
     float: left;
     text-align: left;
     font-size: xx-large;
     margin-top: 2%;
     margin-left: 2%;
+    line-height: 0.9;
 }
 
-.morph-section {
-    background-color: #585858;
-    width: 40%;
-    height: 40%;
-    text-align: center;
-}
 
 .dungeon .code {
     float: right;
