@@ -58,7 +58,7 @@ body {
         position: relative;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 55px;
+        margin-left: 3%;
         font-family: 'VT323', monospace;
         font-size:x-large;
          }
@@ -67,7 +67,7 @@ body {
         width: 30%;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 55px;
+        margin-left: 3%;
         font-family: 'VT323', monospace;
         font-size:x-large;
         } 
@@ -76,7 +76,7 @@ body {
         width: 25%;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 55px;
+        margin-left: 3%;
         } 
 
 
@@ -152,13 +152,15 @@ P.backtomainpage {
     font-size:x-large;
     text-decoration:none;
 }
+
+
 footer{ 
     text-align: center;
     font-size: 35px;
     position:absolute; 
     bottom:1; 
     width:100%; 
-    height:20%; 
+    height:1%; 
   }
 footer li {
     display: inline-block;
