@@ -64,14 +64,10 @@ a {
     height: 15px;
 }
 
-.container {
-    width: 100%;
-    height: 600px;
-    margin-left: 10%;
-}
+
 
 .dungeon{
-    position: absolute;
+    text-align: center;
     border: 1px dashed #585858;
     width: 75%;
     height: 600px;
@@ -79,19 +75,22 @@ a {
     margin-right: auto;
 }
 
-.dungeon .ascii {
-    border: 1px dashed #585858;
-    color: rgb(229, 229, 210);
-    padding: 20px;
-    font-size: 12px;
-    letter-spacing: 4px;
-    line-height: 9px;
-    
+.dungeon .text {
+    float: left;
+    text-align: left;
+    font-size: xx-large;
+    margin-top: 2%;
+    margin-left: 2%;
 }
+.dungeon .code {
+    float: right;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    height: 90%;
+    width: 45%;
+    background-color: black;
+    color: antiquewhite;
+    font-family: 'VT323', monospace;
+    font-size: medium;
 
-.dungeon .ascii, .screen {
-    position: absolute;
-    top: 60%;
-    left: 25%;
-    transform: translate(-50%, -50%);
 }
