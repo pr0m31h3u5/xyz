@@ -77,7 +77,6 @@ a {
 }
 
 .dungeon .MainText {
-    float: left;
     text-align: left;
     font-size: xx-large;
     margin-top: 2%;
@@ -88,8 +87,6 @@ a {
 
 .dungeon .code {
     float: right;
-    margin-top: 2%;
-    margin-bottom: 2%;
     height: 90%;
     width: 45%;
     background-color: black;
@@ -97,4 +94,12 @@ a {
     font-family: 'VT323', monospace;
     font-size: medium;
 
+}
+
+
+.dungeon .morphBox {
+    bottom: 1;
+    width: 40%;
+    height: 40%;
+    background-color: #585858;
 }
