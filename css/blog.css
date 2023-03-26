@@ -67,7 +67,7 @@ a {
 
 
 
-.dungeon{
+/* .dungeon{
     width: 85%;
     position: relative;
     text-align: center;
@@ -88,7 +88,7 @@ a {
 .dungeon .codewrapper {
     text-align: right;
     
-}
+} */
 
 /* .dungeon .code {
     float: right;
@@ -101,4 +101,8 @@ a {
 
 } */
 
+.backtomainpage {
+    font-size: xx-large;
+    line-height: 1;
+}
 
