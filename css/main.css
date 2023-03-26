@@ -54,7 +54,7 @@ body {
 	}
     #greeting {
         box-sizing: border-box;
-        width: 300px;
+        width: 320px;
         position: relative;
         display: inline-block;
         vertical-align: middle;
