@@ -50,33 +50,39 @@ body {
 
 
 #mainPage {
-    width: 100%;
-	margin:0 auto;
+    box-sizing: border-box;
 	}
     #greeting {
-        width: 30%;
+        box-sizing: border-box;
+        width: 320px;
         position: relative;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 3%;
+        margin-left: 10%;
         font-family: 'VT323', monospace;
         font-size:x-large;
+        float: left;
          }
 
     #skills { 
-        width: 30%;
+        box-sizing: border-box;
+        width: 400px;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 3%;
+        margin-left: auto;
         font-family: 'VT323', monospace;
         font-size:x-large;
+        margin-left: 5%;
         } 
         
     #education {
-        width: 25%;
+        box-sizing: border-box;
+        width: 300px;
         display: inline-block;
         vertical-align: middle;
-        margin-left: 3%;
+        margin-left: auto;
+        margin-right: 10%;
+        float: right;
         } 
 
 
