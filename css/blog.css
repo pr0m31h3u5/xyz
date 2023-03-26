@@ -33,6 +33,7 @@ a {
 #clock {
     float: right;
     font-size: x-large;
+    margin-right: 2%;
     }
 
 .navbar {
@@ -67,33 +68,30 @@ a {
 
 
 .dungeon{
+    width: 85%;
+    position: relative;
     text-align: center;
     border: 1px dashed #585858;
-    width: 75%;
-    height: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.dungeon .text {
-    float: left;
+.dungeon .MainText {
+    width: 30%;
     text-align: left;
     font-size: xx-large;
     margin-top: 2%;
     margin-left: 2%;
+    line-height: 0.9;
 }
 
-.morph-section {
-    background-color: #585858;
-    width: 40%;
-    height: 40%;
-    text-align: center;
+.dungeon .codewrapper {
+    text-align: right;
+    
 }
 
-.dungeon .code {
+/* .dungeon .code {
     float: right;
-    margin-top: 2%;
-    margin-bottom: 2%;
     height: 90%;
     width: 45%;
     background-color: black;
@@ -101,4 +99,6 @@ a {
     font-family: 'VT323', monospace;
     font-size: medium;
 
-}
+} */
+
+
