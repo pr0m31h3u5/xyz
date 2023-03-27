@@ -16,19 +16,10 @@
 
 
 header {
-    box-sizing: border-box;
-}
+	text-align: center;
+    letter-spacing: 1px;
+    height:10em;
 
-.PROM {
-    box-sizing: border-box;
-    width: 450px;
-    float: left;
-}
-
-.EUS {
-    box-sizing: border-box;
-    width: 450px;
-    float: left;
 }
 
 
@@ -82,7 +73,6 @@ body {
         font-family: 'VT323', monospace;
         font-size:x-large;
         margin-left: 5%;
-        float: left;
         } 
         
     #education {
@@ -91,8 +81,8 @@ body {
         display: inline-block;
         vertical-align: middle;
         margin-left: auto;
-        margin-left: 8%;
-        float: left;
+        margin-right: 8%;
+        float: right;
         } 
 
 
