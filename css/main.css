@@ -43,6 +43,7 @@ body {
 	line-height: var(--line-height);
 	background-color: black;
 	--line-height: 19px;
+    overflow-x: hidden;
 }
 
 
@@ -57,18 +58,17 @@ body {
         width: 320px;
         position: relative;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: 10%;
         font-family: 'VT323', monospace;
         font-size:x-large;
-        float: left;
          }
 
     #skills { 
         box-sizing: border-box;
         width: 400px;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: auto;
         font-family: 'VT323', monospace;
         font-size:x-large;
@@ -79,10 +79,9 @@ body {
         box-sizing: border-box;
         width: 300px;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: auto;
-        margin-right: 8%;
-        float: right;
+        margin-left: 5%;
         } 
 
 
