@@ -12,7 +12,7 @@ body {
 	font-size: 1em;
 	margin: 0;
 	font-family: 'VT323', monospace;
-	color: rgb(229, 229, 210);
+	color: antiquewhite;
 	line-height: var(--line-height);
 	background-color: black;
 	--line-height: 19px;
@@ -21,7 +21,7 @@ body {
 
 a { 
     text-decoration: none;
-    color:rgb(229, 229, 210) ;
+    color:antiquewhite ;
 }
 
 P.backtomainpage {
