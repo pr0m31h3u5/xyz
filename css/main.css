@@ -43,8 +43,8 @@ body {
 	line-height: var(--line-height);
 	background-color: black;
 	--line-height: 19px;
+    overflow-x: hidden;
 }
-
 
 
 
@@ -57,18 +57,18 @@ body {
         width: 320px;
         position: relative;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: 10%;
         font-family: 'VT323', monospace;
         font-size:x-large;
-        float: left;
          }
 
     #skills { 
+        text-align: center;
         box-sizing: border-box;
         width: 400px;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: auto;
         font-family: 'VT323', monospace;
         font-size:x-large;
@@ -79,10 +79,9 @@ body {
         box-sizing: border-box;
         width: 300px;
         display: inline-block;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: auto;
-        margin-right: 8%;
-        float: right;
+        margin-left: 5%;
         } 
 
 
@@ -90,6 +89,27 @@ body {
 a { 
     text-decoration: underline;
     color:rgb(229, 229, 210) ;
+}
+
+a.raindbow {
+  background: linear-gradient(to right, rgb(15, 192, 2), rgb(1, 184, 245), rgb(7, 56, 170), rgb(19, 0, 128), rgb(115, 0, 255), blue, violet);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: rainbow 20s ease infinite;
+  animation: rainbow 20s ease infinite;
+}
+
+@-webkit-keyframes rainbow {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+ 
+@keyframes rainbow {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
 }
 
 P.greeting_hlwrld{
@@ -118,6 +138,10 @@ PRE.uniDiplome {
     text-align: center;
     font-family: 'VT323', monospace;
     font-size:x-large;
+}
+
+P.educationgif {
+    text-align: center;
 }
 
 #lineHref { 
