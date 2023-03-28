@@ -29,11 +29,17 @@ a {
     color:antiquewhite ;
 }
 
+pre {
+    color:antiquewhite ;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+}
 
 #clock {
-    float: right;
+    float:right;
     font-size: x-large;
     margin-right: 2%;
+    margin-top: 1%;
     }
 
 .navbar {
@@ -64,7 +70,7 @@ a {
 
 .separator {
     width: 100%;
-    height: 15px;
+    height: 65px;
 }
 
 
@@ -147,3 +153,28 @@ a {
   
   /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
   .dropdown:hover .dropbtn {background-color: antiquewhite; color: black;}
+
+
+
+
+.blogContainer {
+    border: 1px dashed #585858;
+    margin:0 auto;
+    max-width: 95%;
+    margin-top: 3%;
+
+}
+
+.blogContainer .greeting {
+    font-size: x-large;
+    margin-left: 1%;
+}
+
+
+
+
+
+
+
+
+
