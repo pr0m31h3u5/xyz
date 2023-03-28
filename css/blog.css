@@ -37,11 +37,11 @@ a {
     }
 
 .navbar {
-    overflow: hidden;
+    position: relative;
     position: fixed;
-    background-color: black;
     top: 0;
     width: 100%;
+    background-color: black;
 }
 
 /* Links inside the navbar */
@@ -108,3 +108,42 @@ a {
     line-height: 1;
 }
 
+
+.dropbtn {
+    font-size: x-large;
+    font-family: 'VT323', monospace;
+    background-color: black;
+    color: antiquewhite;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Контейнер <div> - необходим для размещения выпадающего содержимого */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Выпадающее содержимое (скрыто по умолчанию) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: antiquewhite;
+  }
+  
+  /* Ссылки внутри выпадающего списка */
+  .dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Изменение цвета выпадающих ссылок при наведении курсора */
+  .dropdown-content a:hover {background-color:rgb(232, 218, 200);}
+  
+  /* Показать выпадающее меню при наведении курсора */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+  .dropdown:hover .dropbtn {background-color: antiquewhite; color: black;}
