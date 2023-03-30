@@ -87,6 +87,21 @@ body {
 
 
 
+        @media (max-width: 960px) {
+            .headerPreMax {
+                display: none;
+            }
+            
+        }
+
+        @media (min-width: 961px) {
+            .headerPreMin {
+                display: none;
+            }
+            
+        }
+
+
 a { 
     text-decoration: underline;
     color: antiquewhite ;

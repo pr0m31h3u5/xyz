@@ -183,7 +183,7 @@ summary {
 
   .pentest {
     text-align: center;
-    background: linear-gradient(to right, rgb(15, 192, 2), rgb(1, 184, 245), rgb(7, 56, 170), rgb(19, 0, 128), rgb(115, 0, 255), blue, violet);
+    background: linear-gradient(to right, rgb(78, 192, 2), rgb(12, 107, 0), rgb(7, 170, 15), rgb(0, 128, 0));
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -205,7 +205,7 @@ summary {
 
   .hardware {
     text-align: center;
-    background: linear-gradient(to right, rgb(15, 192, 2), rgb(1, 184, 245), rgb(7, 56, 170), rgb(19, 0, 128), rgb(115, 0, 255), blue, violet);
+    background: linear-gradient(to right, rgb(192, 2, 2), rgb(245, 78, 1), rgb(170, 7, 61), rgb(113, 0, 128), rgb(115, 0, 255));
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -227,7 +227,7 @@ summary {
 
   .software {
     text-align: center;
-    background: linear-gradient(to right, rgb(15, 192, 2), rgb(1, 184, 245), rgb(7, 56, 170), rgb(19, 0, 128), rgb(115, 0, 255), blue, violet);
+    background: linear-gradient(to right, rgb(255, 217, 0), rgb(229, 245, 1));
     background-size: 400% 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
