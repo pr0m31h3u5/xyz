@@ -176,7 +176,7 @@ body {
 
 
 a { 
-    text-decoration: underline;
+    text-decoration: none;
     color: antiquewhite ;
 }
 
@@ -271,22 +271,6 @@ P.backtomainpage {
     font-size:x-large;
     text-decoration:none;
 }
-
-
-/* footer{ 
-    text-align: center;
-    font-size: 35px;
-    bottom:1; 
-    width:100%; 
-  }
-  
-footer li {
-    display: inline-block;
-    padding: 10px;
-    font-size: 35px;
-  }
- */
-
 
  
 

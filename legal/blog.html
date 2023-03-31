@@ -21,7 +21,9 @@
 </head>
 <body>
 
-  <header></header>
+  <header>
+    
+  </header>
 
 <div class="separator"></div>
 
@@ -52,8 +54,8 @@
 
     <div class="navbar">
       <a href="../index.html" class="BtmpTxt">&lt---back to main page /</a>
+      <a href="#">up ^ /</a>
       <a href="#">main /</a>
-      <a href="#">news /</a>
       <div class="dropdown">
         <button class="dropbtn">categories /</button>
         <div class="dropdown-content">
@@ -66,24 +68,6 @@
       <span id="clock" style="color: antiquewhite;"></span>
     </div>
     
-    
-        
-        <!-- <div>
-          <p class="backtomainpage">
-            The page is still being developed. <br>
-             It'll be done soon, but in the meantime, enjoy the movie!
-          </p>
-
-          <iframe  width="800" height="400"
-    src="https://www.youtube.com/embed/Dgwyo6JNTDA"
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-        </div>  -->
-
-
-
-
 
 
     <div class="AsciiMorph">
@@ -107,24 +91,27 @@
     </div>
     <div class="blogContainer">
       <div class="greeting">
-          <h3>My name is pr0m31h3u5</h3>
-          <div>Unfortunately, I can't publish most of my work because of omerta with the companies that hire me.
+
+          <div class="greetingHeader">My name is pr0m31h3u5</div>
+
+          <div class="mainText">Unfortunately, I can't publish most of my work because of omerta with the companies that hire me.
             And this blog, in its own way, is an outlet for me, where I can post non-confidential and unrelated information.
-            I want to share with you my discoveries and interesting chips that I manage to find. In fact, this is my own analogue of the github, which HR managers can consider as an informal resume.</div>
-          <div>//tap on diskette to open</div>
+            I want to share with you my discoveries and interesting chips that I manage to find. In fact, this is my own analogue of the github, which HR managers can consider as an informal resume.
+          </div>
+
 
           <details class="details">
             <summary><pre>
  _________
 |^|     | |
-| |_____| |
+| |_____| | < tap to open me
 |  _____  |
 | |*tap*| |
 | |_____| |
 |_|_____|_|
              </pre></summary>
              <div>team</div>
-          <div>I am a member and leader of the Coven team. We specialize in pentest and ethical hacking, but this is purely my personal website and blog, so some of the articles will be co-authored with __M010CH__ and #D3@C0N, this will be indicated in the afterword.</div>
+          <div>I am a member and leader of the Coven team. We specialize in pentest and ethical hacking, but this is purely my personal website and blog, so some of the articles will be co-authored with __M010CH__ and #D3@()N, this will be indicated in the afterword.</div>
     <div>PS <br> The site has an open source code lying on, directly github. I am far from a web designer or layout designer, so there may be mistakes, mainly due to not quite adaptive design. I will be glad if you write to me about them.</div>
           </details>
       </div>
@@ -511,31 +498,44 @@ return extend(main, {
 })();
 
 var element = document.querySelector('pre');
-AsciiMorph(element, {x: 22,y: 22});                       // change this to make DIV block smaller
+AsciiMorph(element, {x: 12,y: 12});                       // change this to make DIV block smaller
 
 var asciis = [[
-"              ___        ______",
-"             /__/\\   ___/_____/\\ ",
-"             \\  \\ \\ /         /\\",
-"              \\  \\ \\____     /  \\ ",
-"            ___\\  \\ \\  /\\___/___ \\ ",
-"           /  / \\__\\/ /  \\     /\\ \\ ",
-"      ____/  /_______/    \\   / _\\/_____",
-"     /   /   \\       \\    /  / /       /\\ ",
-"  __/   /     \\       \\  /  / /       / _\\__",
-" / /   /       \\_______\\/  / /       / /   /\\ ",
-"/_/___/___________________/ /_______/ /___/  \\ ",
-"\\ \\   \\    ___________    \\ \\       \\ \\   \\  /",
-" \\_\\   \\  /          /\\    \\ \\       \\ \\___\\/ ",
-"    \\   \\/          /  \\    \\ \\       \\  /",
-"     \\__/          /    \\    \\ \\_______\\/",
-"       /__________/      \\    \\  /",
-"       \\   _____  \\      /_____\\/",
-"        \\ /    /\\  \\    /   \\  \\ \\ ",
-"         /____/  \\  \\  /     \\  \\ \\ ",
-"        \\    \\  /___\\/        \\  \\ \\ ",
-"         \\____\\/               \\__\\/",
+" ________  ___       ________  ________",    
+"|\\   __  \\|\\  \\     |\\   __  \\|\\   ____\\ ",    
+"\\ \\  \\|\\ /\\ \\  \\    \\ \\  \\|\\  \\ \\   \\___|" ,   
+" \\ \\   __  \\ \\  \\    \\ \\  \\\ \\  \\ \\   \\___" , 
+"  \\ \\  \\|\\  \\ \\  \\____\\ \\  \\\ \\  \\ \\  \\|\\  \\ " ,
+"   \\ \\_______\\ \\_______\\ \\_______\\ \\_______\\ ",
+"    \\|_______|\\|_______|\\|_______|\\|_______|",                                 
 ],
+  
+
+
+
+// [
+// "              ___        ______",
+// "             /__/\\   ___/_____/\\ ",
+// "             \\  \\ \\ /         /\\",
+// "              \\  \\ \\____     /  \\ ",
+// "            ___\\  \\ \\  /\\___/___ \\ ",
+// "           /  / \\__\\/ /  \\     /\\ \\ ",
+// "      ____/  /_______/    \\   / _\\/_____",
+// "     /   /   \\       \\    /  / /       /\\ ",
+// "  __/   /     \\       \\  /  / /       / _\\__",
+// " / /   /       \\_______\\/  / /       / /   /\\ ",
+// "/_/___/___________________/ /_______/ /___/  \\ ",
+// "\\ \\   \\    ___________    \\ \\       \\ \\   \\  /",
+// " \\_\\   \\  /          /\\    \\ \\       \\ \\___\\/ ",
+// "    \\   \\/          /  \\    \\ \\       \\  /",
+// "     \\__/          /    \\    \\ \\_______\\/",
+// "       /__________/      \\    \\  /",
+// "       \\   _____  \\      /_____\\/",
+// "        \\ /    /\\  \\    /   \\  \\ \\ ",
+// "         /____/  \\  \\  /     \\  \\ \\ ",
+// "        \\    \\  /___\\/        \\  \\ \\ ",
+// "         \\____\\/               \\__\\/",
+// ],
 
 [
 " ______________",
