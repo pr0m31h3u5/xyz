@@ -92,9 +92,9 @@ body {
         position: relative;
         display: inline-block;
         vertical-align: top;
-        margin-left: 2%;
         font-family: 'VT323', monospace;
         font-size:x-large;
+        margin-left: 5%;
          }
 
     #skillsPhone { 
@@ -103,10 +103,9 @@ body {
         width: 300px;
         display: inline-block;
         vertical-align: top;
-        margin-left: auto;
         font-family: 'VT323', monospace;
         font-size:x-large;
-        margin-left: 2%;
+        margin-left: 5%;
         } 
         
     #educationPhone {
@@ -114,8 +113,7 @@ body {
         width: 300px;
         display: inline-block;
         vertical-align: top;
-        margin-left: auto;
-        margin-left: 2%;
+        margin-left: 5%;
         }
 
 
