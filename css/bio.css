@@ -19,6 +19,12 @@ body {
     overflow-x: hidden;
 }
 
+#clock {
+    float: right;
+    font-size: x-large;
+    margin-right: 2%;
+    }
+
 a { 
     text-decoration: none;
     color:antiquewhite ;
@@ -60,11 +66,22 @@ text-align: center;
 font-size:  25px;
 }
 
-#clock {
-float: right;
-font-size: x-large;
-margin-right: 2%;
+
+
+@media (max-width: 960px) {
+    .lifeTime {
+        display: none;
+    }
+    
 }
+
+@media (min-width: 961px) {
+    .lifeTimePhone {
+        display: none;
+    }
+    
+}
+
 
 footer{ 
     text-align: center;

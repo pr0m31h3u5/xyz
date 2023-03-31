@@ -55,7 +55,7 @@ body {
 	}
     #greeting {
         box-sizing: border-box;
-        width: 400px;
+        width: 370px;
         position: relative;
         display: inline-block;
         vertical-align: top;
@@ -67,7 +67,7 @@ body {
     #skills { 
         text-align: center;
         box-sizing: border-box;
-        width: 400px;
+        width: 390px;
         display: inline-block;
         vertical-align: top;
         margin-left: auto;
@@ -78,13 +78,13 @@ body {
         
     #education {
         box-sizing: border-box;
-        width: 400px;
+        width: 350px;
         display: inline-block;
         vertical-align: top;
         margin-left: auto;
         margin-left: 5%;
         } 
-
+                       /* <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ PHONE $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$--> */
 
     #greetingPhone {
         box-sizing: border-box;
