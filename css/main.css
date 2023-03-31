@@ -55,11 +55,11 @@ body {
 	}
     #greeting {
         box-sizing: border-box;
-        width: 320px;
+        width: 400px;
         position: relative;
         display: inline-block;
         vertical-align: top;
-        margin-left: 10%;
+        margin-left: 5%;
         font-family: 'VT323', monospace;
         font-size:x-large;
          }
@@ -78,7 +78,7 @@ body {
         
     #education {
         box-sizing: border-box;
-        width: 300px;
+        width: 400px;
         display: inline-block;
         vertical-align: top;
         margin-left: auto;
