@@ -187,9 +187,14 @@ summary {
     50% { background-position: 100% 50% }
     100% { background-position: 0% 50% }
   } */
+  
+.helloWorldLogo {
+  color: rgb(199, 0, 0);
+}
 
   .pentestLogo {
     text-align: center;
+    color: rgb(0, 190, 0);
   }
   
   /* @-webkit-keyframes rainbow {
@@ -206,6 +211,7 @@ summary {
 
   .hardwareLogo {
     text-align: center;
+    color: rgb(0, 106, 211);
   }
   
   /* @-webkit-keyframes rainbow {
@@ -222,6 +228,7 @@ summary {
 
   .softwareLogo {
     text-align: center;
+    color: rgb(255, 222, 35);
   }
   
   /* @-webkit-keyframes rainbow {
@@ -235,13 +242,19 @@ summary {
     50% { background-position: 100% 50% }
     100% { background-position: 0% 50% }
   } */
+  
 
+  .toolsLogo {
+    text-align: center;
+    color: rgb(123, 35, 255);
+  }
 
 .blogContainer {
     border: 1px dashed #585858;
     margin:0 auto;
     max-width: 95%;
     letter-spacing: 1px;
+    margin-bottom: 20px;
 
 }
 
@@ -281,4 +294,35 @@ summary::-webkit-details-marker {
   color: #fff;
 }
 
+.tags {
+  border: 1px dashed #585858;
+  color:#838383;
+  font-size: x-large;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+}
+
+.greetingHeader {
+  font-size: xx-large;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.mainText {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.mainTextPlain {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.mainTextAfter {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #838383;
+}
 
