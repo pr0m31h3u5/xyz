@@ -237,8 +237,8 @@ summary::-webkit-details-marker {
 
 .textHolder {
   margin: 0 auto;
-  height: 300px;
-  width: 40%;
+  max-height: 300px;
+  max-width: 60%;
   min-width: 250px;
   border: 1px dashed #585858;
   overflow-x: scroll;
@@ -249,30 +249,18 @@ summary::-webkit-details-marker {
   margin-bottom: 40px;
   }
 
-  .textHolderMini {
+  .textHolderAvarage {
     margin: 0 auto;
-    height: 20px;
-    width: 40%;
+    max-height: 100;
+    max-width: 35%;
     min-width: 250px;
     border: 1px dashed #585858;
     overflow-x: scroll;
+    overflow-y: scroll;
     font-family: 'VT323', monospace;
     font-size:larger;
     color: antiquewhite;
     margin-bottom: 40px;
-  }
-
-  .textHolderAvarage {
-  margin: 0 auto;
-  height: 100px;
-  width: 40%;
-  min-width: 250px;
-  border: 1px dashed #585858;
-  overflow-y: hidden;
-  font-family: 'VT323', monospace;
-  font-size:larger;
-  color: antiquewhite;
-  margin-bottom: 40px;
 
   }
 
