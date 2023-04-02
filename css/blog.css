@@ -255,12 +255,26 @@ summary {
     max-width: 95%;
     letter-spacing: 1px;
     margin-bottom: 20px;
-
 }
+
+
 
 .blogContainer .greeting {
     font-size: x-large;
     margin-left: 1%;
+    line-height: 20px;
+}
+
+.mainBlogContainer {
+  overflow-x: scroll;
+  font-family: 'VT323', monospace;
+  border: 1px dashed #585858;
+  margin:0 auto;
+  max-width: 86%;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  max-height: 600px;
+  color: antiquewhite;
 }
 
 
@@ -279,14 +293,16 @@ summary::-webkit-details-marker {
 
 .textHolder {
   margin: 0 auto;
-  height: 200px;
-  width: 220px;
+  height: 300px;
+  width: 40%;
+  min-width: 250px;
   border: 1px dashed #585858;
   overflow-x: scroll;
   overflow-y: scroll;
   font-family: 'VT323', monospace;
-  font-size:small;
+  font-size:larger;
   color: antiquewhite;
+  margin-bottom: 10px;
   }
 
 .morph-section {
@@ -309,6 +325,8 @@ summary::-webkit-details-marker {
   box-sizing: border-box;
   display: inline-block;
   position: relative;
+  margin-left: 10px;
+  margin-bottom: 10px
 }
 
 .greetingHeader {
@@ -321,6 +339,7 @@ summary::-webkit-details-marker {
   margin-top: 15px;
   margin-bottom: 5px;
   text-align: center;
+  font-size: x-large;
 }
 
 .mainTextPlain {
