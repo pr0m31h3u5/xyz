@@ -39,6 +39,14 @@ summary {
     cursor: pointer;
 }
 
+textarea {
+  font-family: 'VT323', monospace;
+  font-size:small;
+  color: bisque;
+  background-color: black;
+  border: none;
+}
+
 #clock {
     float:right;
     font-size: x-large;
@@ -263,6 +271,11 @@ summary {
     margin-left: 1%;
 }
 
+.textareaHolder {
+  width: 220px;
+  margin: 0 auto;
+  border: 1px dashed #585858;
+}
 
 /* details {
   width: 100px ;
