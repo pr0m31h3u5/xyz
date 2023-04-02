@@ -112,14 +112,13 @@
 | |_____| |
 |_|_____|_|
              </pre></summary>
-          <div class="mainTextPlain">I am a member and leader of the "Coven" team. We specialize in pentest and ethical hacking, but this is purely my personal website and blog, so some of the articles will be co-authored with __M010CH__ and #D3@()N, this will be indicated in the afterword.</div>
-          <div class="mainTextAfter">Tag  map: </div>
-          <div class="tags">feat.: </div>
-          <div class="tags">"link on source"</div>
-          <div class="tags">pentest</div>
-          <div class="tags">hardware</div>
-          <div class="tags">software</div>
-          <div class="tags"></div>
+          <div class="mainTextPlain">I am a member and leader of the "Coven" team. We specialize in pentest and ethical hacking, this is purely my personal website and blog, but some of the articles will be co-authored, this will be indicated in the afterword.</div>
+          <div class="mainTextPlain">Articles map:</div>
+          <div class="mainTextPlain">PENTEST:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon</a>
+          <div class="mainTextPlain">HARDWARE:</div>
+          <div class="mainTextPlain">SOFTWARE:</div>
+          <div class="mainTextPlain">TOOLS:</div> <a href="#encrypter">encrypter </a>/ <a href="#virus">virus</a>
+
           <div class="mainTextAfter" >The site has an open source code lying on, directly github. I am far from a web designer or layout designer, so there may be mistakes, mainly due to not quite adaptive design. I will be glad if you write to me about them.</div>
           </details>
       </div>
@@ -152,7 +151,85 @@
 
       <div class="mainBlogContainer">
         <div class="greeting">
-          
+          <div class="greetingHeader">WIFI // Airgeddon</div>
+          <div class="mainText">soft abilities:</div>
+          <div class="textHolder"> 
+            <pre>
+  Fast switching between adapter operation modes.
+
+  DoS via wireless networks by different methods (mdk3, mdk4, aireplay-ng).
+
+  Full support for 2.4GHz and 5 GHz bands.
+
+  Optimization of captured handshake files.
+
+  Offline decryption of passwords in captured WPA/WPA2 files (Handshake and PMKID), using dictionary, brutus and rule-based attacks, using aircrack, crunch and hashcat tools.
+
+  Evil Twin attacks (Fake Access Point)
+
+  Only Rogue/Fake AP mode for listening using an external analyzer (Hostapd + DHCP + DoS).
+
+  Simple built-in sniffing (Hostapd + DHCP + DoS + Ettercap).
+
+  Built-in sniffing, sslstrip2 (Hostapd + DHCP + DoS + Bettercap).
+
+  Integrated sniffing, sslstrip2 and BeEF Browser Exploitation Framework (Hostapd + DHCP + DoS + Bettercap + BeEF).
+
+  Additional MAC address substitution for all Evil Twin attacks.
+
+  WPS functions
+
+  WPS scanning.
+
+  Custom PIN code association.
+
+  Pixie Dust attacks.
+
+  PIN-code brute force attacks.
+
+  Zero PIN attack (reaver).
+
+  An attack on known WPS pins based on an online PIN database.
+
+  Integration of the most common PIN code generation algorithms (ComputePIN, EasyBox, Arcadyan, etc.).
+
+  Offline PIN code generation and the ability to search for a target in the PIN code results in the database.
+
+  Configurable timeouts for all attacks.
+
+  Attacks on corporate networks
+
+  A fake access point using "smooth" and "noisy" modes, intercepting corporate hashes and simple passwords.
+
+  Creating certificates.
+
+  WEP All-in-One attack (a combination of various techniques: Chop-Chop, Caffe Latte, ARP Replay, Hirte, Fragmentation, Fake Association, etc.).
+
+  Compatible with many Linux distributions (see the "Requirements" section).
+
+  Dynamic screen resolution detection and automatic window size for optimal viewing.
+
+  Controlled output. Cleaning up tasks and temporary files. Restoring nftables/iptables after an attack requiring changes to them. The ability to save the monitor mode if desired when exiting.
+
+  Multilingual support and automatic OS language detection function (see the section "Supported languages").
+
+  Menu hints, for ease of use.
+
+  Automatic updates. The script checks for a newer version, if possible.
+
+  Docker image for easy and fast container deployment. You can use an already assembled image on Docker Hub or build your own.
+
+  Automatic detection of HTTP proxy for updates.
+
+  The Wayland graphics system is supported (not only the X Window system).
+
+  Tmux support.
+
+  Full compatibility with iptables and nftables with auto-detection and the ability to force iptables by setting an option.
+
+  An accessible plugin system that allows the community to create its own content in a simple and flexible way using the created function interception system. For more information, see the section "Plugin System".</pre>
+          </div>
+
             <details>
               <summary><pre>
      _____
@@ -160,7 +237,11 @@
     |  o. |
     |__O__|
                </pre></summary>
-              
+               <div class="mainTextPlain">The below command will ask for the root password and disk space access rights. After that, Autogeddon and some dependencies will be installed.</div>
+               <div class="textHolderAvarage"><pre>sudo apt-get install airgeddon</pre></div>
+               <div class="mainTextPlain">Armageddon also requires some additional tools. To install them, run the command:</div>
+               <div class="textHolderAvarage"><pre>sudo apt install bettercap isc-dhcp-server hostapd hostapd-wpe udhcpd mdk4 hcxdumptool lighttpd hcxtools -y</pre></div>
+               <div class="mainTextPlain">Now, if you have an adapter that supports monitor mode and package implementation, you can start using Airgeddon on Kali Linux.</div>
             </details>
         </div>
       </div>
@@ -283,13 +364,12 @@
 
 
       <div class="blogContainer">
+        <a name="encrypter"></a>
         <div class="greeting">
           <div class="greetingHeader">Tools of various types of orientation, used in my activities</div>
           <div class="mainTextAfter"></div>
           </div>
         </div>
-
-
 
       <div class="mainBlogContainer">
         <div class="greeting">
@@ -874,7 +954,13 @@ char *DecryptPassword(char *ascii, char *key)
       </div>
 
 
+
+
+
+
+
       <div class="mainBlogContainer">
+        <a name="virus"></a>
         <div class="greeting">
            <div class="greetingHeader">virus</div>
            <div class="mainText">Makefile</div>
