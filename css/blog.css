@@ -39,14 +39,6 @@ summary {
     cursor: pointer;
 }
 
-textarea {
-  font-family: 'VT323', monospace;
-  font-size:small;
-  color: bisque;
-  background-color: black;
-  border: none;
-}
-
 #clock {
     float:right;
     font-size: x-large;
@@ -271,11 +263,6 @@ textarea {
     margin-left: 1%;
 }
 
-.textareaHolder {
-  width: 220px;
-  margin: 0 auto;
-  border: 1px dashed #585858;
-}
 
 /* details {
   width: 100px ;
@@ -290,9 +277,17 @@ summary::-webkit-details-marker {
     display: none;
 }
 
-
-
-
+.textHolder {
+  margin: 0 auto;
+  height: 200px;
+  width: 220px;
+  border: 1px dashed #585858;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  font-family: 'VT323', monospace;
+  font-size:small;
+  color: antiquewhite;
+  }
 
 .morph-section {
   width: 400px;
