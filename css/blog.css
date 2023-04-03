@@ -26,6 +26,15 @@ a {
     color:antiquewhite ;
 }
 
+p{
+  text-align: center;
+}
+
+img{
+  max-width: 40%;
+  max-height: 50%;
+}
+
 pre {
     color:antiquewhite ;
     font-family: 'VT323', monospace;
