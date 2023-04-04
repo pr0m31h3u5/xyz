@@ -64,7 +64,7 @@
           <a href="#hardware">hardware</a>
           <a href="#software">software</a>
           <a href="#tools">tools</a>
-		  <a href="#literature">literature</a>
+		  <a href="../legal/literature.html">literature</a>
         </div>
       </div>
 
@@ -2893,6 +2893,59 @@ char *DecryptPassword(char *ascii, char *key)
         </div>
       </div>
 
+
+	  <div class="mainBlogContainer">
+		<a name="macChanger"></a>
+		<div class="greeting">
+			<div class="greetingHeader">MAC Changer</div>
+		  <pre class="toolsLogo">
+ ___                          _
+/__/|__                    __//|
+|__|/_/|__               _/_|_||
+|_|___|/_/|_          __/_|___||
+|___|____|/_/|_______/_|____|_||
+|_|___|_____|_______|_____|___||
+|___|___|__|___/___/___|____|_||
+|_|___|___|___|___|___|___|___||
+|___|___|___|___|___|___|___|_||
+|_|___|___|___|___|___|___|___|/
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainText">MAC Address Spoofing on Kali</div>
+			 <div class="mainText">The MAC address is a unique combination of numbers and letters with a length of 48 characters. In simple words, it is the hardware physical number of the device (server, PC, router, etc.), which is assigned to the device's network card during production. MAC spoofing is a method of changing/spoofing the MAC address of a network device. MACChanger is a small utility that allows you to change the MAC address of the network card of a computer running the Linux operating system.</div>
+			 <div class="mainTextPlain">MACChanger Parameters:</div>
+			 <div class="textHolder"><pre>
+-h — help output.
+-V — display the version.
+-s — display the MAC address.
+-e — do not change the manufacturer's bytes (the first three bytes).
+-a — set a random MAC address of the same type.
+-A — set a random MAC address of any type.
+-p — reset to original, permanent hardware MAC
+-r — set a random MAC address.
+-l —list[=STRING] — display information about manufacturers.
+-b — pretend to be a stitched address.</pre></div>
+			 <div class="mainTextPlain">To display the network interfaces, open the Kali Linux terminal and enter the command:</div>
+			 <div class="textHolderAvarage">ifconfig</div>
+			 <div class="mainTextPlain">We will consider the example of an Ethernet connection, designated as eth0 and connected to a wired LAN. To implement MAC address spoofing, you need to disable the interface:</div>
+			 <div class="textHolderAvarage">sudo ifconfig eth0 down</div>
+			 <div class="mainTextPlain">To replace the MAC address (random change), run the command:</div>
+			 <div class="textHolderAvarage">sudo macchanger -A eth0</div>
+			 <div class="mainTextPlain">Now you need to enable the eth0 interface:</div>
+			 <div class="textHolder">sudo ifconfig eth0 up</div>
+			 <div class="mainTextPlain">To check the MAC address and the status of the eth0 interface, run the command "ifconfig" again</div>
+		  </details>
+		  </div>
+		</div>
+	  </div>
+
     </div>
 
 	<pre class="separatorPre">
@@ -2918,33 +2971,12 @@ _/      Y      \_
 		<div class="blogContainer">
 			<div class="greeting">
 				<a name="literature"></a>
-			  <div class="greetingHeader">Just my bookshelf, mostly technical literature</div>
+			  <div class="greetingHeader"><a href="../legal/literature.html">Just my bookshelf, mostly technical literature</a></div>
 			  <div class="mainTextAfter"></div>
 			</div>
 		</div>
 
-		<div class="mainBlogContainer">
-			<div class="greeting">
-				<div class="mainText">you can download them, it's more convenient</div>
-				<object><embed src="../literature/Knuth_-_The_Art_of_Computer_Programming_Vol_2.pdf" width="200px" height="260px"/></object> 
-				<object><embed src="../literature/Grokking_Algorithms_An_Illustrated_Guide_for_Programmers_and_Other_Curious_People_by_Aditya_Bhargava_z-lib_org.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Bruce_Nikkel_-_Practical_Linux_Forensics_A_Guide_for_Digital_Investigators_2021.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Designing_Secure_Software_A_Guide_for_Developers_2021.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Daniel_Zingaro_Algorithmic_Thinking_A_Problem_Based_Introduction.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Apress_Theoretical_Cybersecurity.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Practical_Binary_Analysis_Build_Your_Own_Linux_Tools_for_Binary_Instrumentation_Analysis_and_Disassembly_Dennis_Andriesse.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Rootkits_and_Bootkit__by_Alex_Matrosov_Eugen.pdf" width="200px" height="260px"/></object>
-				<object><embed src="../literature/Practical_Forensic_I__by_Bruce_Nikkel.pdf" width="200px" height="260px"/></object>
-			</div>
-		</div>
-
-
-
 	</div>
-
-
-
-
 
       <script>
 
