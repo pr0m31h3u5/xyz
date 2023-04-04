@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR0M31H3U5</title>
+    <link rel="icon" type="image/png" sizes="512x512"  href="img/icon_512.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/icon_192.png">
+    <link rel="icon" type="image/png" sizes="32x32"    href="img/icon_32.png">
+    <link rel="stylesheet" type="text/css"             href="../css/blog.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/baffle@0.3.6/dist/baffle.min.js"></script>
+
+    <script>  
+      setInterval(function () {
+          var now = new Date();
+          var clock = document.getElementById("clock");
+          clock.innerHTML = now.toLocaleTimeString();
+      }, 1000);
+    </script>
+</head>
+
+<body>
+
+  <header>
+    
+  </header>
+
+<div class="separator"></div>
+
+<script type="text/javascript"> 
+    
+    function runningline(msg,ctrlwidth)
+    {
+    msg = " "+msg
+    newmsg = msg
+    while (newmsg.length < ctrlwidth) {newmsg += msg}
+    document.write ('<form name="Tekst">')
+    document.write ('<input name="tekst" style="border:0;font-weight:bold;color:antiquewhite;background-color:black; width:100%;" value= "'+newmsg+'" size= '+ctrlwidth+' />')
+    document.write ('</form>')
+    prokrutka()
+    }
+    function prokrutka()
+    {
+    NowMsg=document.Tekst.tekst.value
+    NowMsg=NowMsg.substring(1,NowMsg.length)+NowMsg.substring(0,1)
+    document.Tekst.tekst.value = NowMsg
+    bannerid=setTimeout("prokrutka()",500)
+    }
+    </script>
+
+    <script type="text/javascript">
+    runningline("プロメテウス",500)
+    </script> 
+
+    <div class="navbar">
+      <a href="../index.html" class="BtmpTxt">&lt---back to main page /</a>
+      <a href="../legal/bio.html">BIO /</a>
+      <a href="../legal/blog.html">BLOG /</a>
+      <span id="clock" style="color: antiquewhite;"></span>
+    </div>
+    
+
+
+    <!-- <div class="AsciiMorph">
+      <pre class="AsciiMorph">
+      </pre>
+    </div> -->
+
+
+
+	<div class="literature">
+		<pre class="literatureLogo">
+______ ______
+_/      Y      \_
+// ~~ ~~ | ~~ ~  \\
+// ~ ~ ~~ | ~~~ ~~ \\
+//________.|.________\\
+`----------`-'----------'
+╔╦╦╦╦╦═══════╦╦════════╗
+║║╠╬╣╠╦═╦═╦═╦╣╠╦╗╔╦═╦═╗║
+║║║╠╗╔╣╩╣╠╬╝╠╗╔╣╚╝║╠╣╩╣║
+║╚╩╝╚═╩═╩╝╚═╝╚═╩══╩╝╚═╝║
+╚══════════════════════╝
+		</pre>
+
+		<div class="blogContainer">
+			<div class="greeting">
+			  <div class="greetingHeader">Just my bookshelf, mostly technical literature</div>
+			  <div class="mainTextAfter"></div>
+			</div>
+		</div>
+
+		<div class="mainBlogContainer">
+			<div class="greeting">
+				<div class="mainText">you can download them if you are sitting on a desktop (I don't want to adapt this section for mobile phones)</div>
+				<object><embed src="../literature/Knuth_-_The_Art_of_Computer_Programming_Vol_2.pdf" width="200px" height="260px"/></object> 
+				<object><embed src="../literature/Grokking_Algorithms_An_Illustrated_Guide_for_Programmers_and_Other_Curious_People_by_Aditya_Bhargava_z-lib_org.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Bruce_Nikkel_-_Practical_Linux_Forensics_A_Guide_for_Digital_Investigators_2021.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Designing_Secure_Software_A_Guide_for_Developers_2021.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Daniel_Zingaro_Algorithmic_Thinking_A_Problem_Based_Introduction.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Apress_Theoretical_Cybersecurity.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Practical_Binary_Analysis_Build_Your_Own_Linux_Tools_for_Binary_Instrumentation_Analysis_and_Disassembly_Dennis_Andriesse.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Rootkits_and_Bootkit__by_Alex_Matrosov_Eugen.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Practical_Forensic_I__by_Bruce_Nikkel.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Beuken_Brian_The_fundamentals_of_C_C__game_programming_using_target.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Efficient_Linux_at_the_Command_Line_B.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Data_Structures_and_Algorithm_Analysis_in_C__3rd_Edition_by_Dr.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/OReilly_NGINX_Cookbook.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Hacking_For_Dummies___by_Kevin_Beaver.pdf" width="200px" height="260px"/></object>
+				<object><embed src="../literature/Secure_Web_Application_Development_A.pdf" width="200px" height="260px"/></object>
+			</div>
+		</div>
+
+
+
+	</div>
+
+
+
+
+
+      <!-- <script>
+
+
+var AsciiMorph = (function() {
+
+'use strict';
+
+var element = null;
+var canvasDimensions = {};
+
+var renderedData = [];
+var framesToAnimate = [];
+var myTimeout = null;
+
+/**
+ * Utils
+ */
+
+function extend(target, source) {
+  for (var key in source) {
+    if (!(key in target)) {
+      target[key] = source[key];              
+    }
+  }
+  return target;
+}
+
+function repeat(pattern, count) {
+    if (count < 1) return '';
+    var result = '';
+    while (count > 1) {
+        if (count & 1) result += pattern;
+        count >>= 1, pattern += pattern;
+    }
+    return result + pattern;
+}
+
+function replaceAt(string, index, character ) {
+  return string.substr(0, index) + character + string.substr(index+character.length);
+}
+
+/**
+ * AsciiMorph
+ */
+
+function init(el, canvasSize) {
+  
+  // Save the element
+  element = el;
+  canvasDimensions = canvasSize;
+}
+
+function squareOutData(data) {
+   var i;
+  var renderDimensions = {
+    x: 0,
+    y: data.length
+  };
+
+  // Calculate centering numbers
+  for( i = 0; i < data.length; i++ ) {
+    if( data[i].length > renderDimensions.x) {
+      renderDimensions.x = data[i].length
+    }
+  }
+  
+  // Pad out right side of data to square it out
+  for( i = 0; i < data.length; i++ ) {
+    if( data[i].length < renderDimensions.x) {
+      data[i] = (data[i] + repeat(' ', renderDimensions.x - data[i].length ));
+    }
+  }
+  
+  var paddings = {
+    x: Math.floor((canvasDimensions.x - renderDimensions.x) / 2),
+    y: Math.floor((canvasDimensions.y - renderDimensions.y) / 2)
+  }
+  
+  // Left Padding
+  for( var i = 0; i < data.length; i++ ) {
+    data[i] = repeat(' ', paddings.x) + data[i] + repeat(' ', paddings.x);
+  }
+  
+  // Pad out the rest of everything
+  for( var i = 0; i < canvasDimensions.y; i++ ) {
+    if( i < paddings.y) {
+      data.unshift( repeat(' ', canvasDimensions.x));
+    } else if (i > (paddings.y + renderDimensions.y)) {
+      data.push( repeat(' ', canvasDimensions.x));
+    }
+  }
+  
+  return data;
+}
+
+// Crushes the frame data by 1 unit.
+function getMorphedFrame(data) {
+  
+  var firstInLine, lastInLine = null;
+  var found = false;
+  for( var i = 0; i < data.length; i++) {
+    
+    var line = data[i];
+    firstInLine = line.search(/\S/);
+    if( firstInLine === -1) {
+      firstInLine = null;
+    }
+    
+    for( var j = 0; j < line.length; j++) {
+      if( line[j] != ' ') {
+        lastInLine = j;
+      }
+    }
+    
+    if( firstInLine !== null && lastInLine !== null) {
+      data = crushLine(data, i, firstInLine, lastInLine)
+      found = true;
+    }
+
+    firstInLine = null, lastInLine = null;
+  }
+  
+  if( found ) {
+    return data;
+  } else {
+    return false;
+  }
+}
+
+function crushLine(data, line, start, end) {
+  
+  var centers = {
+    x: Math.floor(canvasDimensions.x / 2),
+    y: Math.floor(canvasDimensions.y / 2)
+  }
+  
+  var crushDirection = 1;
+  if( line > centers.y ) {
+    crushDirection = -1;
+  }
+  
+  var charA = data[line][start];
+  var charB = data[line][end];
+  
+  data[line] = replaceAt(data[line], start, " ");
+  data[line] = replaceAt(data[line], end, " ");
+
+  if( !((end - 1) == (start + 1)) && !(start === end) && !((start + 1) === end)) {
+    data[line + crushDirection] = replaceAt(data[line + crushDirection], (start + 1), '+*/\\'.substr(Math.floor(Math.random()*'+*/\\'.length), 1));
+    data[line + crushDirection] = replaceAt(data[line + crushDirection], (end - 1), '+*/\\'.substr(Math.floor(Math.random()*'+*/\\'.length), 1));
+  } else if ((((start === end) || (start + 1) === end)) && ((line + 1) !== centers.y && (line - 1) !== centers.y && line !== centers.y)) {
+    data[line + crushDirection] = replaceAt(data[line + crushDirection], (start), '+*/\\'.substr(Math.floor(Math.random()*'+*/\\'.length), 1));
+    data[line + crushDirection] = replaceAt(data[line + crushDirection], (end), '+*/\\'.substr(Math.floor(Math.random()*'+*/\\'.length), 1));
+  }
+  
+  return data;
+}
+
+function render(data) {
+  var ourData = squareOutData(data.slice());
+  renderSquareData(ourData);
+}
+
+function renderSquareData(data) {
+  element.innerHTML = '';
+  for( var i = 0; i < data.length; i++ ) {
+    element.innerHTML = element.innerHTML + data[i] + '\n';
+  }
+  
+  renderedData = data;
+}
+
+// Morph between whatever is current, to the new frame
+function morph(data) {
+  
+  clearTimeout(myTimeout);
+  var frameData = prepareFrames(data.slice());
+  animateFrames(frameData);
+}
+
+function prepareFrames(data) {
+  
+  var deconstructionFrames = [];
+  var constructionFrames = [];
+
+  var clonedData = renderedData
+  
+  // If its taking more than 100 frames, its probably somehow broken
+  // Get the deconscrution frames
+  for(var i = 0; i < 100; i++) {
+    var newData = getMorphedFrame(clonedData);
+    if( newData === false) {
+      break;
+    }
+    deconstructionFrames.push(newData.slice(0)); 
+    clonedData = newData;
+  }
+  
+  // Get the constuction frames for the new data
+  var squareData = squareOutData(data);
+  constructionFrames.unshift(squareData.slice(0));
+  for( var i = 0; i < 100; i++ ) {
+    var newData = getMorphedFrame(squareData);
+    if( newData === false) {
+      break;
+    }
+    constructionFrames.unshift(newData.slice(0));
+    squareData = newData;
+  }
+  
+  return deconstructionFrames.concat(constructionFrames)
+}
+
+function animateFrames(frameData) {
+  framesToAnimate = frameData;
+  animateFrame();
+}
+
+function animateFrame() {
+  myTimeout = setTimeout(function() {
+    
+    renderSquareData(framesToAnimate[0]);
+    framesToAnimate.shift();
+    if( framesToAnimate.length > 0 ) {
+      animateFrame();
+    }
+  }, 20)
+
+  // framesToAnimate
+}
+
+function main(element, canvasSize) {
+  
+  if( !element || !canvasSize ) {
+    console.log("sorry, I need an element and a canvas size");
+    return;   
+  }
+  
+  init(element, canvasSize);
+}
+
+return extend(main, {
+  render: render,
+  morph: morph
+});
+
+})();
+
+var element = document.querySelector('pre');
+AsciiMorph(element, {x: 12,y: 12});                       // change this to make DIV block smaller
+
+var asciis = [[
+
+],
+
+[
+" ______________",
+"||            ||",
+"||            ||",
+"||            ||",
+"||            ||",
+"||____________||",
+"|______________|",         //done
+" \\ ############ \\",
+"  \\ ############ \\",
+"   \\      ____    \\ " , 
+"    \\_____\\___\\____\\ ",
+],
+
+[
+"                    .==.",
+"                   ()''()-.",
+"        .---.       ;--; /",
+"      .'_:___''. _..'.  __'.",
+"      |__ --==|'-''' \\ '...;",
+"      [  ]  :[|       |---\\ ",
+"      |__| I=[|     .'    '.",
+"      / / ____|     :       '._",
+"     |-/.____.'      | :       :",
+"    /___\ /___\      '-'._----'",
+],
+
+];
+
+AsciiMorph.render(asciis[0]);
+
+var currentIndex = 2;
+
+setTimeout(function() {
+AsciiMorph.morph(asciis[1]);
+}, 1000);
+
+setInterval(function() {
+AsciiMorph.morph(asciis[currentIndex]);
+currentIndex++;
+currentIndex%= asciis.length;
+}, 3000);
+      </script> -->
+
+
+</body>
