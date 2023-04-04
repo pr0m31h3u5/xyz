@@ -2065,7 +2065,7 @@ void display_skeksi(void)
 	</pre>
 
 
-
+<!-- 
     <div class="software">
       <a name="software"></a>
       <pre class="softwareLogo">
@@ -2106,7 +2106,7 @@ void display_skeksi(void)
             </details>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 
@@ -2952,6 +2952,41 @@ char *DecryptPassword(char *ascii, char *key)
 			 <div class="textHolderAvarage">sudo ifconfig eth0 up</div>
 			 <div class="mainTextPlain">To check the MAC address and the status of the eth0 interface, run the command "ifconfig" again</div>
 		  </details>
+		</div>
+	  </div>
+
+	  <div class="mainBlogContainer">
+		<a name="pswd"></a>
+		<div class="greeting">
+			<div class="greetingHeader">Generating passwords in the Linux terminal</div>
+		    <pre class="toolsLogo">
+.---.
+/     \
+\.@-@./
+/`\_/`\
+//  _  \\
+| \     )|_
+/`\_`>  &lt_/ \
+\__/'---'\__/
+		    </pre>
+		    <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 	<div class="mainText">base64</div>
+				<div class="textHolderAvarage">$ date | base64 | tail -c 32</div>
+				<div class="mainText">md5sum</div>
+				<div class="textHolderAvarage">date | md5sum | tail -c 32</div>
+				<div class="mainText">openssl</div>
+				<div class="textHolderAvarage">openssl rand -hex 16</div>
+				<div class="mainText">GPG</div>
+				<div class="textHolderAvarage">gpg --gen-random --armor 2 20</div>
+				<div class="mainText">/dev/urandom</div>
+				<div class="textHolderAvarage">&lt /dev/urandom tr -cd "[:print:]" | head -c 28; echo</div>
+			 </details>
 		</div>
 	  </div>
 
