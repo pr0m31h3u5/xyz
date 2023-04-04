@@ -36,7 +36,7 @@
     newmsg = msg
     while (newmsg.length < ctrlwidth) {newmsg += msg}
     document.write ('<form name="Tekst">')
-    document.write ('<input name="tekst" style="border:0;font-weight:bold;color:antiquewhite;background-color:black; width:100%;" value= "'+newmsg+'" size= '+ctrlwidth+' />')
+    document.write ('<input name="tekst" style="border:0;font-weight:bold;color:antiquewhite;background-color:black;width:100%;" value= "'+newmsg+'" size= '+ctrlwidth+' />')
     document.write ('</form>')
     prokrutka()
     }
@@ -119,7 +119,7 @@
           <div class="mainTextPlain">PENTEST:</div> <a href="#private chat">private chat </a>/ <a href="#maleware">maleware</a>
           <div class="mainTextPlain">HARDWARE:</div>
           <div class="mainTextPlain">SOFTWARE:</div>
-          <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/<a href="#encrypter">encrypter </a>
+          <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/ <a href="#encrypter">encrypter </a>
           <div class="mainTextAfter" >The site has an open source code lying on, directly github. I am far from a web designer or layout designer, so there may be mistakes, mainly due to not quite adaptive design. I will be glad if you write to me about them.</div>
           </details>
       </div>
@@ -2029,11 +2029,11 @@ void display_skeksi(void)
           <div class="greetingHeader">This section contains interesting articles and discoveries in the world of technology related to my specialty and beyond</div>
           <div class="mainTextAfter"></div>
           </div>
-        </div>
+      </div>
 
       <div class="mainBlogContainer">
         <div class="greeting">
-           
+           <div class="greetingHeader">devices that make my life easier</div>
             <details>
               <summary><pre>
      _____
@@ -2041,7 +2041,17 @@ void display_skeksi(void)
     |  o. |
     |__O__|
                </pre></summary>
-              
+			   <div class="mainText">introduction</div>
+               <div class="mainTextPlain">Today I would like to sort out a rather interesting question for me: what should a pentester carry with him?  The question is good because it cannot be answered unequivocally, you will be forced to choose some unique combination of your own, thereby you will better understand what is really useful for you. Pentester, for me, is not a profession, but a way of life. I am it 24/7, testing almost everything I touch and everything I see. A cafe, a university intranet, even my neighbors' home Wi-Fi. All this is subject to ethical attacks and when I find a vulnerability, I usually inform the owners of the network about it. In addition, I believe that a penester should have not only the skills to use and create malware and vulnerabilities, but also the skills of physical hacking. Therefore, the article will contain devices and things unrelated to the IT world.</div>
+			   <div class="mainText">I would like to start with the appearance</div>
+			   <div class="mainTextPlain">Appearance: You don't have to stand out. Trying to look the most secretive of all, novice pentesters, as a rule, forget that looking like a black spot AKA Mr. Robot = attract attention to themselves. Because that's how people who have something to hide most often dress. It is better that everything is always at hand, but at the same time it does not interfere with walking or running.</div>
+			   <div class="mainTextPlain">Backpack: choose it wisely, I had to go through a lot of options. I'm not kidding, I have 11 backpacks at home that didn't fit me for some reason. There is no need to rely on reviews, since this thing should be selected individually for everyone. However, pockets are necessary for everyone. A well-organized space on your back and quick access to things will reduce your precious time searching for the necessary item. Besides, backpacks with one big pocket are complete nonsense. I hope the people who came up with this will burn in hell. An example from the popular TV series "Mr. Robot" will suit most. 3V Gear makes quite convenient things, although there are many questions about their quality. It is worth considering that a backpack with a laptop inside and a lot of devices weighs quite a lot and the shoulders will get very tired, as well as the laptop needs protection from moisture and falls, which this company cannot boast of. Personally, I like Fenruien. These are backpacks that have a dense back plate and good build quality. I really like the two-compartment versions and I recommend them to all my friends. In addition, there is built-in protection against theft. I don't know why, well, that is, what prevents me from just hanging up a regular lock. Although I'll give it my due, it's convenient.</div>
+			   <div class="mainText">auxiliary devices</div>
+			   <div class="mainTextPlain">Power Bank: An Axiom. I don't need to prove that this is necessary. Anyway, I use the baseus company's power banks. They have a wonderful model for charging laptops.</div>
+			   <div class="mainTextPlain">Wires: Baseus. Take two-meter ones and no less. Preferably in a fabric braid, they are stronger.</div>
+			   <div class="mainTextPlain">Adapters: As they say, "taste and color."</div>
+			   <div class="mainTextPlain">Storage: It is better to take a 1 terabyte HDD/SSD with you. Either your own server, I have both. Very convenient, I advise it. Completely replaces any cloud storage. In addition, if you run the server from your device, then the chance of hacking when setting up the correct protection is practically excluded. The disadvantages of your server include the need to have hands from your shoulders, as well as electricity can be turned off at home and, as a rule, this happens at the most inopportune moments.</div>
+			   <div class="mainText">and so we smoothly moved on to the most interesting</div>
             </details>
         </div>
       </div>
@@ -2939,14 +2949,42 @@ char *DecryptPassword(char *ascii, char *key)
 			 <div class="mainTextPlain">To replace the MAC address (random change), run the command:</div>
 			 <div class="textHolderAvarage">sudo macchanger -A eth0</div>
 			 <div class="mainTextPlain">Now you need to enable the eth0 interface:</div>
-			 <div class="textHolder">sudo ifconfig eth0 up</div>
+			 <div class="textHolderAvarage">sudo ifconfig eth0 up</div>
 			 <div class="mainTextPlain">To check the MAC address and the status of the eth0 interface, run the command "ifconfig" again</div>
 		  </details>
-		  </div>
 		</div>
 	  </div>
 
-    </div>
+
+
+	  <!-- <div class="mainBlogContainer">
+		<a name="wiresharkTraffic"></a>
+		<div class="greeting">
+			<div class="greetingHeader">Wireshark traffic interception</div>
+		  <pre class="toolsLogo">
+\.          |\
+       \`.___---~~  ~~~--_
+       //~~----___  (_o_-~
+      '           |/'
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainText">I will not delve into Wireshark, but only consider the basic knowledge that will help you take the first steps in using the tool.</div>
+			 <div class="mainTextPlain">Protocols are used for data transmission. Unsecured plaintext protocols are protocols in which confidential information, such as usernames and passwords, is transmitted in plaintext. This allows you to intercept traffic using the MITM (Man in the Middle) technique. This attack is also known as "Sniffing". Wireshark works with most of the known protocols, has an easy-to-understand graphical interface and a filter system. It supports running on various OS such as Linux, Windows, Solaris, Mac OS X, etc. It is distributed for free and preinstalled in Kali. To demonstrate traffic interception, we will need a stand — three virtual machines that will be located on the same local network.</div>
+
+
+		   </details>
+		</div>
+	  </div> -->
+
+
+	  </div>
 
 	<pre class="separatorPre">
 プロメテウスプロメテウスプロメテウス
@@ -2971,7 +3009,7 @@ _/      Y      \_
 		<div class="blogContainer">
 			<div class="greeting">
 				<a name="literature"></a>
-			  <div class="greetingHeader"><a href="../legal/literature.html">Just my bookshelf, mostly technical literature</a></div>
+			  <div class="greetingHeader"><a href="../legal/literature.html">Just my bookshelf, mostly technical literature *tap to open*</a></div>
 			  <div class="mainTextAfter"></div>
 			</div>
 		</div>
