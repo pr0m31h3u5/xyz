@@ -31,6 +31,10 @@ p{
   text-align: center;
 }
 
+embed {
+  margin-left: 10px;
+}
+
 img{
   max-width: 40%;
   max-height: 50%;
@@ -44,6 +48,10 @@ pre {
 
 summary {
     cursor: pointer;
+}
+
+embed {
+  max-width: 300px;
 }
 
 #clock {
@@ -203,6 +211,11 @@ summary {
     color: rgb(123, 35, 255);
   }
 
+  .literatureLogo {
+    text-align: center;
+    color: rgb(190, 24, 223);
+  }
+
 .blogContainer {
     border: 1px dashed #585858;
     margin:0 auto;
@@ -246,6 +259,7 @@ summary::-webkit-details-marker {
 }
 
 .separatorPre {
+  color: #585858;
   margin-top: 100px;
   text-align: center;
   font-family: 'DotGothic16', sans-serif;
