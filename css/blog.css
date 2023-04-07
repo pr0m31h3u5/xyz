@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 header {
 	text-align: center;
@@ -152,6 +153,13 @@ embed {
   
 .helloWorldLogo {
   color: rgb(199, 0, 0);
+}
+
+.helloWorldBlog {
+  text-align: center;
+  color: rgb(199, 0, 0);
+  font-size: xx-large;
+  margin-bottom: 2%;
 }
 
   .pentestLogo {
@@ -319,7 +327,7 @@ summary::-webkit-details-marker {
 }
 
 .greetingHeader {
-  font-size: xx-large;
+  font-size: x-large;
   margin-top: 10px;
   text-align: center;
 }
@@ -344,3 +352,34 @@ summary::-webkit-details-marker {
   color: #838383;
 }
 
+
+
+.inner {
+  width:90%;
+  color: #585858;
+}
+
+.activity {
+  width:20px;
+  text-align:center;
+}
+
+.spinning {
+  animation: spinning steps(8, end) 2s infinite;
+}
+
+@-webkit-keyframes progress-bar-width {
+0%   { width: 0; }
+100% { width: 100%; }
+}
+
+@-webkit-keyframes spinning {
+  0%   { transform:rotate(0deg) }
+  100% { transform:rotate(360deg) }
+}
+
+.pipes .inner, .blocks .inner, .blocks-gaps {
+animation: progress-bar-width 5s infinite;
+overflow:hidden;
+animation-timing-function:linear;
+}
