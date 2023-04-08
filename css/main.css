@@ -273,6 +273,20 @@ P.backtomainpage {
 }
 
  
+@-webkit-keyframes spinning {
+    0%   { transform:rotate(0deg) }
+    100% { transform:rotate(360deg) }
+  }
+
+
+.activity {
+  width:20px;
+  text-align:center;
+}
+
+.spinning {
+  animation: spinning steps(8, end) 2s infinite;
+}
 
 
 

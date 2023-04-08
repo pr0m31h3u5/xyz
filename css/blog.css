@@ -408,7 +408,7 @@ summary::-webkit-details-marker {
 }
 
 .pipes .inner, .blocks .inner, .blocks-gaps {
-animation: progress-bar-width 5s infinite;
+animation: progress-bar-width 30s infinite;
 overflow:hidden;
 animation-timing-function:linear;
 }
