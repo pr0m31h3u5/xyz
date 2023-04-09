@@ -60,7 +60,7 @@
       <div class="dropdown">
         <button class="dropbtn">categories /</button>
         <div class="dropdown-content">
-          <a href="#Who watches the watchers">Who watches the watchers</a>
+          <a href="#Who watches the watchers">commencement</a>
 		  <a href="#literature">literature</a>
           <a href="#tools">tools</a>
         </div>
@@ -113,7 +113,7 @@
           <div class="mainTextPlain">Articles map:</div>
           <div class="mainTextPlain">PENTEST:</div>
           <div class="mainTextPlain">HARDWARE:</div>
-          <div class="mainTextPlain">SOFTWARE:</div> <a href="NBDE">NBDE</a>
+          <div class="mainTextPlain">SOFTWARE:</div> <a href="#NBDE">NBDE</a> /<a href="#WAF"> WAF</a>
           <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/ <a href="#encrypter">encrypter </a>/ <a href="#pswd">Linux pswd gen</a>/ <a href="#SSH MITM"> SSH MITM</a> /<a href="#SQLMap"> SQLMap</a>
           <div class="mainTextAfter" >The page is still being developed. </div>
           </details>
@@ -159,17 +159,10 @@
 			</div>
 		</div>
 
-		
-		<a name=""></a>
-		<p class="separatorPre">
-あなたが聞くものは何も信じておらず、あなたが見る半分だけを信じています
-		</p>
-
-		<div class="helloWorldBlog">Believe nothing you hear, and only one half that you see</div>
 
 		<div class="mainBlogContainer">
 			<div class="greeting">
-				<div class="mainText"><span style="color: rgb(199, 0, 0)">Poe knew what he was talking about, didn't he?</span></div>
+				<div class="mainText"><span style="color: rgb(199, 0, 0)">Believe nothing you hear, and only one half that you see</span></div>
 				<div class="mainTextPlain">People, as much as I would like the opposite, tend to lie. Please, but you and I are far from righteous, although I can't say for you, you can wear a white cloak as much as your heart desires. Sooner or later he will wallow in the mud and become an old, wet and unaffordable rag of a madman lost in his own lies.</div>
 			<details>
 				<summary><pre>
@@ -392,7 +385,122 @@ File system: A pool can contain one or more file systems formatted in XFS and us
 		</div>
 
 
-		
+
+		<a name="WAF"></a>
+		<p class="separatorPre">
+どのアプリケーションファイアウォールがサイトまたはアプリケーションを保護しているかを判断するにはどうすればよいですか
+		</p>
+
+		<div class="helloWorldBlog">WAF</div>
+		<div class="mainBlogContainer">
+			<div class="greeting">
+				<div class="mainText"><span style="color: rgb(199, 0, 0)">How to determine which WAF protects a website or application?</span></div>
+				<div class="mainTextPlain">Web Application Firewall filters and controls the traffic passing through it. Its main function is to ensure the protection of web applications from the main disadvantages.</div>
+				<div class="mainTextPlain">WAF differs from a traditional firewall in that it can filter the contents of specific online applications, while traditional firewalls act as a protective barrier between servers.</div>
+				<details>
+					<summary><pre>
+   _____
+  |==   | &lt- examine
+  |  o. |
+  |__O__|
+					 </pre></summary>
+					<div class="mainTextPlain">HTTP interaction is subject to a set of rules. These rules apply to typical vulnerabilities, such as cross-site scripting and SQL injection, etc.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0)">TELNET</span></div>
+					<div class="mainTextPlain">Telnet is mainly used by network administrators and penetration testing specialists. Telnet allows you to connect to remote nodes via any port, as mentioned earlier.</div>
+					<div class="mainTextPlain">example:</div>
+					<div class="textHolderAvarage"><pre>
+	$telnet Targetwebsite.com 80
+	Trying 18.166.248.208...
+	Connected to Targetwebsite.com.
+	Escape character is '^]'
+					</pre></div>
+					<div class="mainTextPlain">After executing the above command, write HEAD / HTTP / 1.1 and press enter.</div>
+					<div class="textHolderAvarage"><pre>
+	# telnet 18.166.248.208  80 
+	Trying 18.166.248.208... 
+	Connected to 18.166.248.208. 
+	Escape character is '^]'. 
+	HEAD / HTTP/1.1 
+	Host: 18.166.248.208
+
+	HTTP/1.1 200 OK 
+	Date: SUN, 10 Oct 2021 05:08:03 IST 
+	Server: Apache X-Powered-By: PHP/5.3.5 ZendServer/5.0 
+	Set-Cookie: SESSIONID VULN SITE=t25put8gliicvqf62u3ctgjm21; path=/ 
+	Expires: Thu, 19 Nov 1981 08:52:00 IST
+	Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0 
+	Pragma: no-cache 
+	X-Varnish: 4723782781
+	Age: 0
+	Via: 1.1 varnish
+	Connection: close 
+	Content-Type: text/html
+
+	Connection closed by foreign host.
+					</pre></div>
+					<div class="mainTextPlain">It specifies the server hosting the website and the backend language in which it was created after using telnet on target port 80. Some WAF systems allow you to change this header, and can also force the web server to send HTTP responses that differ from the standard ones. As shown in the above result, the web server responded to our request and showed that the firewall/edge gateway is Varnish.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0)">NMAP</span></div>
+					<div class="mainTextPlain">For this purpose, you can also use Nmap, which has a script that can determine the firewall of a web application. <br> example:</div>
+					<div class="textHolderAvarage"><pre>
+	$nmap --script=http-waf-fingerprint targetwebsite.com
+	Starting Nmap 7.90 ( https://nmap.org ) at 2021-10-10 07:58 IST
+	Nmap scan report for targetsite.com (18.166.248.208)
+	Host is up (0.24s latency).
+	Not shown: 982filtered ports
+	PORT STATE SERVICE
+	53/tcp    open   domain
+	80/tcp open http
+	| http-waf-fingerprint:
+	| Detected WAF
+	| Citrix Netscaler
+	443/tcp open https
+	5432/tcp  closed postgresql
+	8080/tcp closed http-proxy
+
+	Nmap done: 1 IP address (1 host up) scanned in 25.46 seconds  
+					</pre></div>
+					<div class="mainTextPlain">After using the above Nmap command, the Citrix Netscaler firewall was detected.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0)">WHATWAF</span></div>
+					<div class="mainTextPlain">Whatwaf is a security tool for web application information and detecting the presence of any WAF. This tool is useful for determining whether a web application is protected by WAF during a security assessment. If this is the case, circumvention and prevention strategies may be useful when further testing or operating the web application. <br> Install-Kali:</div>
+					<div class="textHolderAvarage"><pre>
+	sudo apt install python3-pip
+
+	git clone https://github.com/ekultek/whatwaf
+
+	cd whatwaf
+
+	sudo pip3 install -r requirements.txt 
+					</pre></div>	
+					<div class="mainTextPlain">At startup, without having a Python version, we can easily specify an executable file:</div>	
+					<div class="textHolderAvarage">  ./whatwaf --help </div>
+					<div class="mainTextPlain">The WhatWaf firewall detection tool is easy to use. We just need to run the following command:</div>		
+					<div class="textHolderAvarage"> ./whatwaf -u https://www.targetsite.com</div>
+					<div class="mainTextPlain">We can also use the tor service to scan the WAF, but this may increase the latency. Just type (--tor) in the end of above command. <br>The main advantage of the WhatWaf tool is that it automatically tries to transmit the payload bypassing the detected firewall.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0)">Wafw00f</span></div>
+					<div class="mainTextPlain">The most well-known tool for detecting web application firewall is Wafw00f. Wafw00f sends an HTTP request to the web application firewall to identify it. If sending an HTTP request fails, wafw00f makes a malicious HTTP request. If sending a malicious HTTP request fails, wafw00f examines previous HTTP requests and uses a simple algorithm to determine if the web application firewall is responding to our attacks.</div>
+				</details>
+			</div>
+		</div>
+
+		<div class="mainBlogContainer">
+			<div class="greeting">
+				<div class="mainText"><span style="color: rgb(199, 0, 0)">Bypassing WAF to perform advanced SQL injection based on errors</span></div>
+				<div class="mainTextPlain">Let's "assume" that we stumbled upon a site, looking through which we did not see a single parameter, even though it is built in PHP. <br>Let's try using google dorking and using a simple dork inurl:http://domain.com then we will be able to get some interesting endpoints...</div>
+				<details>
+					<summary><pre>
+   _____
+  |==   | &lt- examine
+  |  o. |
+  |__O__|
+					 </pre></summary>
+					
+				</details>
+			</div>
+		</div>
+
+
+
+
 		<a name="literature"></a>
 		<pre class="separatorPre">
 技術文献
