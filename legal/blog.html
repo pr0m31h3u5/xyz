@@ -309,11 +309,90 @@ File system: A pool can contain one or more file systems formatted in XFS and us
 	Pool Name   Name          Used      Created             Device                           UUID
 	pool1       filesystem1   545 MiB   Jul 07 2022 13:12   /dev/stratis/pool1/filesystem1   283f8f78-0b33-4a35-a2d0-e9cd6b85d124
 				</pre></div>
-				<div class="mainText">STILL WORK ON THIS</div>
+				<div class="mainTextPlain">To get a detailed output, use the command below:</div>
+				<div class="textHolderAvarage">lsblk</div>
+				<div class="mainTextPlain">After restarting the system, you will not be able to access the pool, to access it, you must provide the created kernel key. First recreate the key using the same key description.</div>
+				<div class="textHolderAvarage">stratis key set --capture-key pool1key</div>
+				<div class="mainTextPlain">Now unlock the pool with the key:</div>
+				<div class="textHolderAvarage">stra</div>
+				<div class="mainTextPlain">Get access to the pool:</div>
+				<div class="textHolder"><pre>
+	stratis pool list
+	Name                        Total Physical   Properties                                   UUID
+	pool1   29.95 GiB / 590.65 MiB / 29.38 GiB      ~Ca, Cr   be1d8a96-03f8-41a4-9d63-09baa1c697d8
+				</pre></div>
+				<div class="mainTextPlain">This is quite convenient, but requires memorizing a bunch of keys. This can be simplified using NBDE as shown below.</div>
+				<div class="mainTextPlain">To be able to bind an encrypted Stratis pool to NBDE, you need a Tang server. This Tang server will help unlock the encrypted pool without having to provide a description of the kernel keychain as described above. First install the Tang server:</div>
+				<div class="textHolderAvarage">yum install tang</div>
+				<div class="mainTextPlain">Select any unused port and bind the service to it. For example, port 7500 as shown below:</div>
+				<div class="textHolderAvarage">semanage port -a -t tangd_port_t -p tcp 7500</div>
+				<div class="mainTextPlain">Allow the specified port on the firewall:</div>
+				<div class="textHolderAvarage">firewall-cmd --add</div>
+				<div class="mainTextPlain">Enable the tangd service:</div>
+				<div class="textHolderAvarage">systemctl enable tangd.socket</div>
+				<div class="mainTextPlain">Create an override configuration file in /etc/systemd/system/tangd.socket.d/ using the command:</div>
+				<div class="textHolderAvarage">syst</div>
+				<div class="mainTextPlain">Change the default port 80 to the new port as shown below:</div>
+				<div class="textHolderAvarage"><pre>
+	[Socket]
+	ListenStream=
+	ListenStream=7500
+				</pre></div>
+				<div class="mainTextPlain">Restart the daemon and restart the service:</div>
+				<div class="textHolderAvarage">sys</div>
+				<div class="mainTextPlain">Check if the service is bound to the new port:</div>
+				<div class="textHolderAvarage"><pre>
+	systemctl show tangd.socket -p Listen
+	Listen=[::]:7500 (Stream)
+				</pre></div>
+				<div class="mainTextPlain">Get a thumbprint of the tang server:</div>
+				<div class="textHolderAvarage"><pre>
+	tang-show-keys 7500
+	Mbe0_qFvUj7GRHXUp6g6yEQhixU
+				</pre></div>
+				<div class="mainTextPlain">Now bind the encrypted Stratis pool to NBDE using the command with the syntax below:</div>
+				<div class="textHolderAvarage">stratis pool bind nbde &ltpool_name>  &lttang-server> --t</div>
+				<div class="mainTextPlain">Replace poll_name and tang-server accordingly.</div>
+				<div class="mainTextPlain">To check if we can unlock the Stratis pool using NBDE, reboot the system.</div>
+				<div class="textHolderAvarage">reboot now</div>
+				<div class="mainTextPlain">After a successful system reboot, switch to the root user.</div>
+				<div class="textHolderAvarage">su</div>
+				<div class="textHolder"><pre>
+	stratis pool list
+	Name                        Total Physical   Properties                                   UUID
+				</pre></div>
+				<div class="mainTextPlain">In addition to unlocking the pool with a key, you can unlock it using NBDE (spike), as shown below:</div>
+				<div class="textHolderAvarage">stratis p</div>
+				<div class="mainTextPlain">You can agree that you no longer need to provide a keychain to access the pool.</div>
+				<div class="mainTextPlain">Decoupling the Stratis pool from additional ciphers leaves only the main cipher of the core keychain in effect. Additional encryption can be associated with NBDE or TPM. To remove this binding, use the command with the syntax below:</div>
+				<div class="textHolderavarage">stratis pool unbind clevis &ltpool_name>&lt/pool_name></div>
+				<div class="mainTextPlain">example:</div>
+				<div class="textHolderAvarage">stratis pool unbind clevis pool1</div>
+				<div class="mainTextPlain">After that, access to the pool can only be obtained using the primary encryption key of the kernel</div>
+				<div class="mainTextPlain">To use the Stratis file system, it must be mounted. First create a mount point:</div>
+				<div class="textHolderAvarage">mkdir /mnt/pool_1</div>
+				<div class="mainTextPlain">You can perform a temporary file system mount using the command:</div>
+				<div class="textHolderAvarage">mount /dev/stratis</div>
+				<div class="mainTextPlain">To mount a file system permanently, start by defining the UUID of the file systems:</div>
+				<div class="textHolder"><pre>
+	lsblk --output=UUID /dev/stratis/pool1/filesystem1
+	UUID
+	65a09ba7-1053-424c-9e04-d21c5c090249
+				</pre></div>
+				<div class="mainTextPlain">Now edit the /etc/fstab file and add the file system.</div>
+				<div class="textHolder"><pre>
+	sudo vi /etc/fstab
+	UUID=65a09ba7-1053-424c-9e04-d21c5c090249 /mnt/pool_1 xfs defaults,x-systemd.requires=stratisd.service 0 0
+				</pre></div>
+				<div class="mainTextPlain">Don't forget to replace the UUID and mount point. Restart the system daemon:</div>
+				<div class="textHolderAvarage">systemctl daemon-reload</div>
+				<div class="mainTextPlain">After that, the file system will be able to survive a system reboot.</div>
 			</details>
 			</div>
 		</div>
 
+
+		
 		<a name="literature"></a>
 		<pre class="separatorPre">
 技術文献
