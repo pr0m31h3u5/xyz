@@ -220,7 +220,7 @@ embed {
 
   .toolsLogo {
     text-align: center;
-    color: rgb(35, 222, 255);
+    color: rgb(199, 0, 0);
   }
 
   .literatureLogo {
@@ -412,3 +412,215 @@ animation: progress-bar-width 30s infinite;
 overflow:hidden;
 animation-timing-function:linear;
 }
+
+
+
+
+
+
+/* -------------------------------------MAC----------------------------------- */
+form {
+	margin: auto;
+	padding: 0 1.5em;
+	text-align: center;
+}
+/* Mappy Mac */
+.mac, .mac__shape {
+	transition: all 0.25s ease-in-out;
+}
+.mac {
+	cursor: pointer;
+	display: block;
+	font-size: 0.5em;
+	margin: 0 auto 3rem auto;
+	position: relative;
+	width: 23em;
+	height: 30em;
+	-webkit-tap-highlight-color: transparent;
+}
+.mac__input, .mac__shape, .mac__sr {
+	position: absolute;
+}
+.mac__shape {
+	top: 0;
+	left: 0;
+	width: 1em;
+	height: 1em;
+	transform-origin: 0 0;
+	will-change: transform;
+}
+.s1, .s2 {
+	background: #adadad;
+	width: 22em;
+}
+.s1 {
+	height: 1.1em;
+	transform: translate(0.5em,0);
+}
+.s2 {
+	height: 25em;
+	transform: translate(0.5em,1em);
+}
+.s3, .s4 {
+	width: 20em;
+	height: 3em;
+	transform: translate(1.5em,27em);
+}
+.s3 {
+	background:
+		linear-gradient(90deg,#7d7d7d 6em,#575757 6em 11em,#57575700 11em) 0 0,
+		linear-gradient(90deg,#8f8f8f 8em,#7d7d7d 8em 10em,#575757 10em 14em,#57575700 14em) 0 1em,
+		linear-gradient(90deg,#a6a6a6 8em,#8f8f8f 8em 11em,#7d7d7d 11em 13em,#575757 13em 17em,#57575700 17em) 0 2em;
+	background-color: #2b2b2b;
+	background-repeat: no-repeat;
+	background-size: 100% 1em;
+}
+.s4 {
+	background: antiquewhite;
+	opacity: 0;
+}
+.s5 {
+	background: #d4cdfd;
+	box-shadow:
+		0 -1em #3b3b3b,
+		1em 0 antiquewhite,
+		0 1em antiquewhite,
+		-1em 0 #3b3b3b;
+	width: 16em;
+	height: 13em;
+	transform: translate(3.5em,3em);
+}
+.mac__shape:nth-of-type(n + 6):nth-of-type(-n + 23), .s25 {
+	background: #000;
+}
+.s6, .s7, .s8, .s9, .s10 {
+	transform: translate(6.5em,6em);
+}
+.s6, .s11 {
+	height: 2em;
+}
+.s11, .s12, .s13, .s14, .s15 {
+	transform: translate(14.5em,6em);
+}
+.s16, .s17 {
+	transform: translate(9.5em,10em);
+}
+.s18 {
+	height: 5em;
+	transform: translate(10.5em,6em);
+}
+.s19 {
+	transform: translate(10.5em,10em);
+}
+.s20 {
+	transform: translate(7.5em,12em);
+}
+.s21 {
+	width: 4em;
+	transform: translate(8.5em,13em);
+}
+.s22, .s23 {
+	transform: translate(12.5em,12em);
+}
+.s24 {
+	background: #62fe3d;
+	box-shadow: 0 1em #ff001a;
+	width: 2em;
+	transform: translate(2.5em,22em);
+}
+.s25 {
+	box-shadow: 0 1em antiquewhite;
+	width: 8em;
+	transform: translate(11.5em,22em);
+}
+/* Sad Mac */
+.mac__input:checked ~ .s1, .mac__input:checked ~ .s2, .mac__input:checked ~ .s5 {
+	background: antiquewhite;
+}
+.mac__input:checked ~ .s1 {
+	transform: translate(1em,0) scale(calc(21/22),1);
+}
+.mac__input:checked ~ .s2 {
+	transform: translate(0,1em) scale(calc(23/22),1);
+}
+.mac__input:checked ~ .s3, .mac__input:checked ~ .s4 {
+	transform: translate(1em,27em) scale(1.05,1);
+}
+.mac__input:checked ~ .s4 {
+	opacity: 1;
+}
+.mac__input:checked ~ .s5 {
+	box-shadow:
+		0 -1em #000,
+		1em 0 #000,
+		0 1em #000,
+		-1em 0 #000;
+	width: 17em;
+	transform: translate(3em,3em);
+}
+.mac__input:checked ~ .s6 {
+	transform: translate(7em,6em) scale(1,0.5);
+}
+.mac__input:checked ~ .s7 {
+	transform: translate(6em,5em);
+}
+.mac__input:checked ~ .s8 {
+	transform: translate(8em,5em);
+}
+.mac__input:checked ~ .s9 {
+	transform: translate(6em,7em);
+}
+.mac__input:checked ~ .s10 {
+	transform: translate(8em,7em);
+}
+.mac__input:checked ~ .s11 {
+	transform: translate(15em,6em) scale(1,0.5);
+}
+.mac__input:checked ~ .s12 {
+	transform: translate(14em,5em);
+}
+.mac__input:checked ~ .s13 {
+	transform: translate(16em,5em);
+}
+.mac__input:checked ~ .s14 {
+	transform: translate(14em,7em);
+}
+.mac__input:checked ~ .s15 {
+	transform: translate(16em,7em);
+}
+.mac__input:checked ~ .s16 {
+	transform: translate(9em,9em);
+}
+.mac__input:checked ~ .s17 {
+	transform: translate(10em,10em);
+}
+.mac__input:checked ~ .s18 {
+	transform: translate(11em,10em) scale(1,0.2);
+}
+.mac__input:checked ~ .s19 {
+	transform: translate(12em,9em);
+}
+.mac__input:checked ~ .s20 {
+	transform: translate(8em,13em);
+}
+.mac__input:checked ~ .s21 {
+	transform: translate(9em,12em) scale(1.25,1);
+}
+.mac__input:checked ~ .s22 {
+	transform: translate(14em,13em) scale(2,1);
+}
+.mac__input:checked ~ .s23 {
+	transform: translate(16em,14em);
+}
+.mac__input:checked ~ .s24 {
+	background: #000;
+	box-shadow: 0 1em antiquewhite;
+	transform: translate(2em,21em) scale(1.5,1);
+}
+.mac__input:checked ~ .s25 {
+	transform: translate(13em,21em) scale(0.875,1);
+}
+
+
+
+
