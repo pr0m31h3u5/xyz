@@ -36,6 +36,7 @@ embed {
   margin-left: 10px;
 }
 
+
 .mainIMG {
   max-width: 40%;
   max-height: 50%;
@@ -620,7 +621,5 @@ form {
 .mac__input:checked ~ .s25 {
 	transform: translate(13em,21em) scale(0.875,1);
 }
-
-
 
 
