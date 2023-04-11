@@ -185,15 +185,6 @@
 		</div>
 
 
-
-		<div class="mainBlogContainer">
-			<div class="greeting">
-				<div class="mainText"><span style="color: rgb(199, 0, 0);">Does the cobbler really not pay for his shoes?</span></div>
-
-			</div>
-		</div>
-
-
 		<a name="NBDE"></a>
 		<p class="separatorPre">
 ネットワークバインドディスク暗号化(NBDE)を使用した暗号化されたプールの使用
@@ -566,6 +557,70 @@ File system: A pool can contain one or more file systems formatted in XFS and us
 			</div>
 		</div>
 
+
+		<a name="OWASPZAP"></a>
+		<p class="separatorPre">
+オワスプ-ザップ
+		</p>
+
+		<div class="helloWorldBlog">OWASP</div>
+		<div class="mainBlogContainer">
+			<div class="greeting">
+				<div class="mainText"><span>Open Web Application Security Project - A worldwide non-profit organization whose activities are aimed at improving software security.</span></div>
+				<div class="mainText">This section will focus on vulnerabilities and utilities associated with this company.</div>
+			</div>
+		</div>
+
+
+		<div class="mainBlogContainer">
+			<div class="greeting">
+				<div class="mainText"><span style="color: rgb(199, 0, 0);">OWASP ZAP // Zed Attack Proxy</span></div>
+
+				<div class="mainTextPlain">This is one of the most popular security tools in the world. This is part of the OWASP community, which means that this tool is absolutely free. It is designed for users with a wide range of security experience, so it is great for developers and functional testers who are not familiar with pentests. <br> ZAP creates a proxy server between the client and your site. While you are navigating your website, it captures all the actions, and then attacks the site with known methods.</div>
+				<details>
+					<summary><pre>
+   _____
+  |==   | &lt- learn
+  |  o. |
+  |__O__|
+					 </pre></summary>
+					 <div class="mainTextPlain">At startup, ZAP will prompt you to save the session. If we want to get the configuration of our website or test results later, then we should save the session, but for now we can choose the value: "No, I do not want to persist the session ...". <br><span style="color:#585858;">So what is the difference between active and passive scanning?</span><br>From the point of view of the penetration test, passive scanning is a harmless test that only looks for answers and checks them for known vulnerabilities. Passive scanning does not change the site data, which makes it more secure. // Active scanning attacks the website with various known methods. Active scanning can modify data and insert malicious scripts. Therefore, it is better to test sites that are deployed on a local host in this way. <br>Let's take a quick look at the ZAP UI layout to understand the basics. The next screen lists windows with 4 sections. <br>In the upper left corner of the screen you can see the modes, of which there are only 4:</div>
+					 <div class="textHolder"><pre>
+	Standard Mode: Allows you to do anything with any website.
+	Attack Mode: actively checks any websites.
+	Safe Mode: Disables all malicious functions during scanning.
+	Protected Mode: Allows you to scan websites in a specific area. This prevents unwanted sites from being scanned.
+					 </pre></div>
+					 <div class="mainTextPlain">the sites section will list all the sites that we access via ZAP. <br>"Show only URLs." It is advisable to enable this option, since after the first tests this section will be heavily clogged. To focus on the target website, you need to put the "In Scope" flag on it. <br>The workspace window consists of 3 tabs:</div>
+					 <div class="textHolder"><pre>
+	Quick launch window. This is the fastest and most direct way to start an active scan. Enter the address of the target website and click the attack button. First, it guards the website, and then performs an active scan.
+
+	Request and response window. These are the most commonly used parts of the user interface. On the query tab, you can see that the window is divided into 2 parts:
+
+	The top one shows the request header and cookies
+	The lower one shows the parameters of the message sent to the server
+
+	The response window is similar to the request window and shows:
+
+	Heading
+	Response body
+					 </pre></div>
+					 <div class="mainTextPlain">The bottom window shows:</div>
+					 <div class="textHolder"><pre>
+	Results
+	Request history
+	Test vulnerabilities
+					 </pre></div>
+					 <div class="mainTextPlain">The "Alerts" tab. Shows vulnerabilities found on the target website. When we click on one of the warnings in the list, the corresponding request/response opens in the upper right corner and displays accurate information about the vulnerability.  The POST request is executed at http://localhost:22742/api/TokenAuth/Authenticate . The user logs in with credentials and the server returns an http-500 error. HTTP-500 Internal Server Error. OWASP ZAP thinks this is a problem. And in the 3rd window you will see some information about it. It shows the exact URL and a yellow flag (medium risk). The description says: This page contains an error/warning message that may reveal sensitive information, such as the location of the file that caused the unhandled exception. This information can be used for further attacks on the web application. The warning may be false if the error message is on the documentation page. This is cool because OWASP ZAP feels some information leakage. He suspects that the website throws an unhandled exception. This can be really vulnerable when a website shows an attacker some exception stack and provides information about the environment or code. But in our example, the response is a JSON content that says "Invalid user name or password", but the developer prefers to send it via HTTP-500. This is a false positive, since no information is disclosed. <br>The solutions section contains information on how to solve the problem. <br>In an earlier version of OWASP ZAP, you had to configure your browser's proxy server to capture requests, but now there is a useful JxBrowser feature! It is a Chromium-based browser integrated into OWASP ZAP. By default, the entire proxy configuration is configured in it, which allows OWASP ZAP to pass all traffic through it. Click "Launch Browser" and go to your website. <br>To extract the website tree, you need to scan it in JxBrowser. You need to hit all the functions and go through all the possible actions. This stage is very important! Crawling a site means scanning all the links and getting the structure of the website. We have already written about other crawlers earlier. Why do we need crowling? Crowling is needed only in cases when it was not possible to access everything only with the help of navigation. It can detect moments that have been missed, as well as when proxying is not possible. To launch it, right-click on the site and select "Attack" from the menu, and then click "Spider". Make sure that there is a checkbox next to the "recurse" item! Click the "Start Scan" button. It will take some time depending on the number of links on your site. How to test a SPA (single page application)? If this is a SPA website, then you must additionally specify that the parameters represent the structure and not the application data. <br>If you cover all the functions and actions of your SPA site, you will not need to guard it. Owasp has added a platform of extensions, the list of which can be viewed using the icon of a 3-colored rectangle. To install the extension, click the Marketplace tab and enter the extension name in the field. Then click the "Install Selected" button. There is no need to restart ZAP. Several useful extensions:</div>
+					 <div class="textHolder"><pre>
+	Active Scanner rules
+	Passive Scanner rules
+	FuzzDB
+					 </pre></div>
+					 <div class="mainTextPlain">I recommend using the following scan settings. In the "Analyze" menu, select "Scan Policy Manager". Click the "Modify" button. In the "Scan Policy" window, set "Low" => "Threshold To All" and click "Go". The same as with Insane => Strength To All and press the Go button. All attacks will be stored in memory, and scanning will be more reliable. To save the settings, click Ok. <br>Attacking the target site is very simple. Add your site to the context. To do this, right-click the target website in the left pane. Select: "Include in Context", "Default Context". Now you can see that a new website URL appears in the popup window, which adds your website as a regular expression. An asterisk (*) in the URL indicates an attack on all URLs of this website. Finally, click OK. <br>Show only URLs in the current area. This way we hide other websites and prevent random attacks. Then we starting crowling and ATTACK! <br>This is the main goal. Let's start an active scan. The "Start Scan" button will start the process, which may take a long time (depending on the number of URLs). <br>Fuzzing is sending unexpected or random data to the inputs of a website. Usually we check the input data on the client side, so we ignore some problems in the server side. When fuzzy key data is entered (for example, the main search input on a website or the input data on the login page), coding errors and security loopholes can be seen. This is an optional security step. If you want to launch a fuzzer, then in the left part of the panel, find the request you want to process. Right-click and select "Attack", then click "Fuzz". The data for publishing the request will be visible in the fuzzer window. Click on them and select the text that we want to attack. On the right panel, click the "Add" button. You will see the Payloads window. Click the "Add" button again. In the "Add Payload" window, select "File Fuzzers" in the type list box. Select the file you want to use. This file is a database that will be used for bruteforce. Bruteforce sites on WordPress can be done by other methods, which we have already written about earlier. When the bruteforce process is over, the results will be listed on the bottom tab called Fuzzer. Those marked as Fuzzed require special attention. <br>The crawler searches for known URLs with organic links, but it cannot find a URL that is not mentioned anywhere on the site. In this case, forced browsing comes to the rescue, which uses bruteforce dictionaries to check if there are any other hidden URLs, such as the admin panel or something that can be hacked. <br>Break is a very good function for intercepting and modifying requests and responses. If you want to change any data of the request publication or response data, right-click on the site, select "Break", in the "Add Break Point" window click "Save". Now the bottom panel will show that the breakpoint is enabled. From now on, all requests will be intercepted by the OWASP ZAP tool. Whenever you make a request from the original website, the ZAP window is brought to the foreground and allows you to modify the request. After you click the green play button on the toolbar, ZAP will give you the response sent by the server. This answer can also be changed. This way, your browser will receive a modified response. <br>We have scanned the site well for known vulnerabilities and it's time to get acquainted with the results. You can see the problems on the "Alerts" tab located in the lower panel. The next screen shows 5 warnings with colored flags. If there is no red flag, then you are in luck. If there are red flags, then first of all it is necessary to work on their elimination. If no warnings are visible, something may have been done wrong. When you click one of the warnings, the corresponding request and response window is displayed. There is a good reporting tool that automatically creates a handy report file. You can export reports in the following formats: HTML, XML,JSON,Markdown. Let's choose HTML as an example. As you can see, this is a well-organized final report, which in its original form can be sent to any colleagueWe have scanned the site well for known vulnerabilities and it's time to get acquainted with the results. You can see the problems on the "Alerts" tab located in the lower panel. The next screen shows 5 warnings with colored flags. If there is no red flag, then you are in luck. If there are red flags, then first of all it is necessary to work on their elimination. If no warnings are visible, something may have been done wrong. When you click one of the warnings, the corresponding request and response window is displayed. There is a good reporting tool that automatically creates a handy report file. You can export reports in the following formats: HTML, XML,JSON,Markdown. Let's choose HTML as an example. As you can see, this is a well-organized final report, which in its original form can be sent to any colleague.</div>
+				</details>
+			</div>
+		</div>
 
 		<!-- <div class="mainBlogContainer">
 			<div class="greeting">
