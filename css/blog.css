@@ -49,11 +49,12 @@ embed {
 pre {
     color:antiquewhite ;
     font-family: 'VT323', monospace;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 summary {
     cursor: pointer;
+    width: 15%;
 }
 
 embed {
@@ -623,3 +624,13 @@ form {
 }
 
 
+
+
+@-webkit-keyframes pulsing-opacity {
+  0%   { opacity:0 }
+  100% { opacity:1 }
+}
+.pulsing {
+  font-family:monospace;
+  animation: pulsing-opacity steps(10) 0.6s infinite alternate;
+}
