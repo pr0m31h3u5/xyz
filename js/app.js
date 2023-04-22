@@ -478,3 +478,21 @@
 //     currentIndex++;
 //     currentIndex%= asciis.length;
 //   }, 3000);
+
+function runningline(msg,ctrlwidth)
+        {
+        msg = " "+msg
+        newmsg = msg
+        while (newmsg.length < ctrlwidth) {newmsg += msg}
+        document.write ('<form name="Tekst">')
+        document.write ('<input name="tekst" style="border:0;font-weight:bold;color:antiquewhite;background-color:black;width:100%;" value= "'+newmsg+'" size= '+ctrlwidth+' />')
+        document.write ('</form>')
+        prokrutka()
+        }
+        function prokrutka()
+        {
+        NowMsg=document.Tekst.tekst.value
+        NowMsg=NowMsg.substring(1,NowMsg.length)+NowMsg.substring(0,1)
+        document.Tekst.tekst.value = NowMsg
+        bannerid=setTimeout("prokrutka()",200)
+        }
