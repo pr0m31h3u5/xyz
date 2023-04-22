@@ -116,6 +116,9 @@ body {
         margin-left: 10%;
         }
 
+        .headerPreMin {
+            font-family: 'VT323', monospace;
+        }
 
 
         @media (max-width: 960px) {
