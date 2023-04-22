@@ -184,7 +184,7 @@ a {
 }
 
 a.raindbow {
-  background: linear-gradient(to right, rgb(15, 192, 2), rgb(1, 184, 245), rgb(7, 56, 170), rgb(19, 0, 128), rgb(115, 0, 255), blue, violet);
+  background: linear-gradient(to right, rgb(199, 0, 0), rgb(232, 1, 1), rgb(133, 0, 0), rgb(255, 213, 26), rgb(255, 0, 0), rgb(255, 132, 0), rgb(199, 0, 0));
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
