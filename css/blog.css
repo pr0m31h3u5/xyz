@@ -2,11 +2,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
+* {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 header {
 	text-align: center;
     letter-spacing: 1px;
     height:2em;
 }
+
 
 body {
 	font-size: 1em;
@@ -18,7 +24,6 @@ body {
 	--line-height: 19px;
 	/* width: 100%;
     max-width: 100%; */
-    overflow-x: hidden;
     /* position: absolute; */
 }
 
