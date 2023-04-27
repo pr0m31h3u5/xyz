@@ -20,7 +20,13 @@
 	user-select: none;
 }
 
-
+img {
+  pointer-events: none; /*элемент не может стать объектом мыши*/
+  user-select: none; /*запрет на перенос текста*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
 header {
 	text-align: center;
