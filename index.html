@@ -127,7 +127,7 @@
             <p class="diplomesStr">&lt------My education------&gt</p>
             <div class="diolomes">
                     <p class="educationgif">
-                        <img src="img/EDUCATION.png" width="80px" height="130px">
+                        <img src="img/EDUCATION.png" width="65px" height="130px">
                     </p>
                 <pre class="uniDiplome">
   ______________________________
@@ -295,10 +295,22 @@
             </div>
         </div>
     </div>
+    
 
 
     
                         <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ JAVASCRIPT $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
+    <script>
+      var ImagesL = document.querySelectorAll("img"); 
+// перебор изображений
+for (var i = 0; i < ImagesL.length; i++) {
+  // для каждого изображения применяем функцию
+    ImagesL[i].onmousedown = function (e) {
+        return false;
+    }
+}
+    </script>
 
     <script>
         const text = baffle('.greeting_hlwrld');

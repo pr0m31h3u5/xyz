@@ -1286,6 +1286,17 @@ currentIndex%= asciis.length;
 }, 3000);
       </script>
 
+	  <script>
+      var ImagesL = document.querySelectorAll("img"); 
+// перебор изображений
+for (var i = 0; i < ImagesL.length; i++) {
+  // для каждого изображения применяем функцию
+    ImagesL[i].onmousedown = function (e) {
+        return false;
+    }
+}
+    </script>
+
 
 
 <!-- _________________________________________----------------------MAC-----------------________ -->
