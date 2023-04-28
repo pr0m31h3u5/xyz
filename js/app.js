@@ -496,3 +496,5 @@ function runningline(msg,ctrlwidth)
         document.Tekst.tekst.value = NowMsg
         bannerid=setTimeout("prokrutka()",200)
         }
+
+        
