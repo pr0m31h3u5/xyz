@@ -848,7 +848,7 @@ function initAllGlitch(){
 		let selector = arrayElements[i];
 		let randLetterNumber = 2 + Math.floor(Math.random() * 3);
 		let randGlitchTime = 400 + Math.floor(Math.random() * 2500);
-		let randGlitchPauseTime = 400 + Math.floor(Math.random() * 2500);
+		let randGlitchPauseTime = 400 + Math.floor(Math.random() * 3500);
 		let glitch = new Glitch(selector, i, randLetterNumber, 200, 65, randGlitchPauseTime);
 		glitch.init();
 		glitchArray.push(glitch);
