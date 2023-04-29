@@ -40,7 +40,8 @@
         <button class="dropbtn">categories /</button>
         <div class="dropdown-content">
           <a href="#Who watches the watchers">commencement</a>
-          <a href="#glossary">glossary</a><span style="color: rgb(199, 0, 0);">(NEW)</span>
+          <a href="#glossary">glossary</a><span style="color: rgb(199, 0, 0);">(NEW)</span>&nbsp;&nbsp;
+		  <a href="#roadmap">roadmap</a>
 		  <a href="#literature">literature</a>
         </div>
       </div>
@@ -868,12 +869,60 @@ File system: A pool can contain one or more file systems formatted in XFS and us
 
 
 
+		<a name="roadmap"></a>
+		<p class="separatorPre">
+ロードマップ
+		</p>
+
+		<pre class="helloWorldLogo" style="text-align: center;">
+╔═══════╦╦═══════╗
+║╔═╦═╦═╦╝╠══╦═╦═╗║
+║║╠╣║╠╝║║║║║╠╝║║║║
+║╚╝╚═╩═╩═╩╩╩╩═╣╔╝║
+╚═════════════╩╩═╝
+		</pre>
+
+		<div class="mainBlogContainer">
+			<div class="greetings">
+				<div class="mainText">augmented roadmap and checklist of default pentesting</div>
+				<details>
+					<summary><pre style="font-size: larger;">
+          O
+         _|_
+   ,_.-_' _ '_-._,
+    \ (')(.)(') /
+ _,  `\_-===-_/`  ,_
+>  |----"""""----|  &lt &lt - follow
+`""`--/   _-@-\--`""`        the
+     |===L_I===|    instructions
+      \       /
+      _\__|__/_
+     `""""`""""`
+					 </pre></summary>
+					 <fieldset style="border-style:dashed; color:antiquewhite; width: 80%; margin: auto; margin-bottom: 30px;">
+						<legend style="font-size: x-large;">mark the completed items:</legend>
+					
+						<div class="checkbox1">
+						  <input type="checkbox" checked>
+						  <label for="scales">Open my site</label>
+						</div>
+					
+						<div class="checkbox1">
+						  <input type="checkbox">
+						  <label for="horns">Horns</label>
+						</div>
+					</fieldset>
+				</details>
+		</div>
+			</div>
+
+
 
 
 		<a name="literature"></a>
-		<pre class="separatorPre">
+		<p class="separatorPre">
 技術文献
-				</pre>
+				</p>
 
 
 		<div class="literature">
@@ -1487,7 +1536,7 @@ for (var i = 0; i < ImagesL.length; i++) {
   let selector = arrayElements[i];
   let randLetterNumber = 1 + Math.floor(Math.random() * 1);
   let randGlitchTime = 400 + Math.floor(Math.random() * 2500);
-  let randGlitchPauseTime = 2000 + Math.floor(Math.random() * 2500);
+  let randGlitchPauseTime = 1000 + Math.floor(Math.random() * 3500);
   let glitch = new Glitch(selector, i, randLetterNumber, 200, 65, randGlitchPauseTime);
   glitch.init();
   glitchArray.push(glitch);

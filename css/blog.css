@@ -629,7 +629,9 @@ form {
 }
 
 
-
+.checkbox1 {
+  font-size: large
+}
 
 @-webkit-keyframes pulsing-opacity {
   0%   { opacity:0 }
