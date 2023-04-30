@@ -306,3 +306,99 @@ P.backtomainpage {
 
 
 
+.preloader {
+    /*фиксированное позиционирование*/
+    position: fixed;
+    /* координаты положения */
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* фоновый цвет элемента */
+    background: black;
+    /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+    z-index: 1001;
+  }
+  
+  .preloader-2 {
+    text-align: center;
+    font-size: x-large;
+  }
+  
+  .preloader-2 .line {
+    width: 1px;
+    height: 12px;
+    background: antiquewhite;
+    margin: 0 1px;
+    display: inline-block;
+    animation: opacity-2 1000ms infinite ease-in-out;
+  }
+  
+  .preloader-1 .line-1, .preloader-2 .line-1 { animation-delay: 800ms; }
+  .preloader-1 .line-2, .preloader-2 .line-2 { animation-delay: 600ms; }
+  .preloader-1 .line-3, .preloader-2 .line-3 { animation-delay: 400ms; }
+  .preloader-1 .line-4, .preloader-2 .line-4 { animation-delay: 200ms; }
+  .preloader-1 .line-6, .preloader-2 .line-6 { animation-delay: 200ms; }
+  .preloader-1 .line-7, .preloader-2 .line-7 { animation-delay: 400ms; }
+  .preloader-1 .line-8, .preloader-2 .line-8 { animation-delay: 600ms; }
+  .preloader-1 .line-9, .preloader-2 .line-9 { animation-delay: 800ms; }
+  
+  @keyframes opacity-1 { 
+    0% { 
+      opacity: 1;
+    }
+    50% { 
+      opacity: 0;
+    }
+    100% { 
+      opacity: 1;
+    }  
+  }
+  
+  @keyframes opacity-2 { 
+    0% { 
+      opacity: 1;
+      height: 15px;
+    }
+    50% { 
+      opacity: 0;
+      height: 12px;
+    }
+    100% { 
+      opacity: 1;
+      height: 15px;
+    }  
+  }
+  
+  .preloader__item:last-child {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1s;
+  }
+  
+  @keyframes preloader-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes preloader-bounce {
+  
+    0%,
+    100% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1);
+    }
+  }
+  
+  .loaded_hiding .preloader {
+    transition: 0.3s opacity;
+    opacity: 0;
+  }
+  
+  .loaded .preloader {
+    display: none;
+  }
