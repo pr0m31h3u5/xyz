@@ -18,6 +18,20 @@
 </head>
 <body>
 
+  <div class="preloader">
+		<div class="preloader-2">
+			<span class="line line-1"></span>
+			<span class="line line-2"></span>
+			<span class="line line-3"></span>
+			<span class="line line-4"></span>
+			<span class="line line-5"></span>
+			<span class="line line-6"></span>
+			<span class="line line-7"></span>
+			<span class="line line-8"></span>
+			<span class="line line-9"></span>
+			<div>Loading</div>
+		  </div>
+	</div>
 
     <header>
         <pre class="headerPreMax">
@@ -301,6 +315,17 @@
     
                         <!--$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ JAVASCRIPT $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
 
+
+
+    <script>
+		window.onload = function () {
+		  document.body.classList.add('loaded_hiding');
+		  window.setTimeout(function () {
+			document.body.classList.add('loaded');
+			document.body.classList.remove('loaded_hiding');
+		  }, 500);
+		}
+	  </script>
     <script>
       var ImagesL = document.querySelectorAll("img"); 
 // перебор изображений
