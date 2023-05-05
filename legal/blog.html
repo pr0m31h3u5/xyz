@@ -1098,7 +1098,7 @@ const uint32Data = new Uint32Array(imageData.data.buffer);
 // Separate buffer to calculate propagated 'heat'
 const data = new Uint8ClampedArray(CW * CH);
 
-// Randomly increase the 'heat' of the last row of pixes.
+// Randomly increase the 'heat' of the last row of pixes
 const setFire = () => {
   const ly = HOT_AREA_BOT * CW;
   for (let x = 0; x < CW; x++) {
@@ -1109,7 +1109,7 @@ const setFire = () => {
   }
 };
 
-// Randomly decrease the 'heat' of the last few rows.
+// Randomly decrease the 'heat' of the last few rows
 const stopFire = () => {
   for (let y = HOT_AREA_TOP; y <= HOT_AREA_BOT; y++) {
     for (let x = 0; x < CW; x++) {
